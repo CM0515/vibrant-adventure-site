@@ -33,7 +33,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative h-screen bg-hero-pattern bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/40 backdrop-blur-[2px]" />
         <div className="container mx-auto px-4 relative h-full flex items-center">
           <div className="max-w-3xl">
             <motion.h1 
@@ -110,12 +110,12 @@ const Index = () => {
                     alt={destination.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  <div className="absolute top-3 right-3 bg-white rounded-full px-3 py-1 text-sm font-medium">
+                  <div className="absolute top-3 right-3 bg-white rounded-full px-3 py-1 text-sm font-medium text-primary">
                     ${destination.price}
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{destination.name}</h3>
-                <div className="flex items-center gap-1 text-yellow-400 mb-4">
+                <div className="flex items-center gap-1 text-primary mb-4">
                   <Star size={16} fill="currentColor" />
                   <Star size={16} fill="currentColor" />
                   <Star size={16} fill="currentColor" />

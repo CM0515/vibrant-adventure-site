@@ -26,17 +26,17 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#00B7C7",
-          hover: "#009DAF",
-          light: "#E6F9FB",
+          DEFAULT: "#E97B00",
+          hover: "#D16500",
+          light: "#FFF3E8",
         },
         secondary: {
           DEFAULT: "#1A1A1A",
           light: "#666666",
         },
         accent: {
-          DEFAULT: "#FF6B6B",
-          light: "#FFE1E1",
+          DEFAULT: "#F97316",
+          light: "#FEC6A1",
         },
       },
       backgroundImage: {
