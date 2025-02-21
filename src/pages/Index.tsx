@@ -19,7 +19,14 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-white">TourVibes</div>
+            <div className="flex items-center gap-2">
+              <img 
+                src="https://lh3.googleusercontent.com/a/ACg8ocLolP-oDXrcJRUDaixu8hEJLoPstVHIA4lCPvE7x49PkcIfTC8=s288-c-no" 
+                alt="GoTours Logo" 
+                className="w-10 h-10 rounded-full"
+              />
+              <span className="text-2xl font-bold text-white">GoTours</span>
+            </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#" className="nav-link">Inicio</a>
               <a href="#" className="nav-link">Tours</a>
