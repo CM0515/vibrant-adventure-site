@@ -1,11 +1,22 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Index = () => {
   const [searchDestination, setSearchDestination] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
   
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const featuredDestinations = [
     { id: 1, name: "Santorini", image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png", price: "1,299" },
     { id: 2, name: "Maldivas", image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png", price: "1,599" },
@@ -16,7 +27,9 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white shadow-lg" : "bg-transparent backdrop-blur-md"
+      }`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -25,13 +38,23 @@ const Index = () => {
                 alt="GoTours Logo" 
                 className="w-10 h-10 rounded-full"
               />
-              <span className="text-2xl font-bold text-white">GoTours</span>
+              <span className={`text-2xl font-bold transition-colors duration-300 ${
+                isScrolled ? "text-secondary" : "text-white"
+              }`}>GoTours</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="nav-link">Inicio</a>
-              <a href="#" className="nav-link">Tours</a>
-              <a href="#" className="nav-link">Sobre Nosotros</a>
-              <a href="#" className="nav-link">Contacto</a>
+              <a href="#" className={`transition-colors duration-300 ${
+                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
+              }`}>Inicio</a>
+              <a href="#" className={`transition-colors duration-300 ${
+                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
+              }`}>Tours</a>
+              <a href="#" className={`transition-colors duration-300 ${
+                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
+              }`}>Sobre Nosotros</a>
+              <a href="#" className={`transition-colors duration-300 ${
+                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
+              }`}>Contacto</a>
             </div>
             <button className="btn-primary">Reserva Ahora</button>
           </div>
