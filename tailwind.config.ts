@@ -40,7 +40,7 @@ export default {
         },
       },
       backgroundImage: {
-        'hero-pattern': "url('/lovable-uploads/1380a26c-c092-4ad8-9c06-b2a4a4acb866.png')",
+        'hero-pattern': "url('https://t4.ftcdn.net/jpg/00/63/22/25/240_F_63222556_quAyvJ7tAFTO9smFRdzmjxJsBpr3CrGt.jpg')",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
