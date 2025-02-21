@@ -59,7 +59,7 @@ const Index = () => {
         </div>
       </nav>
 
-      <section className="relative h-screen bg-hero-pattern bg-cover bg-center">
+      <section className="relative h-screen bg-hero-pattern bg-cover bg-center bg-no-repeat">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/40 backdrop-blur-[2px]" />
         <div className="container mx-auto px-4 relative h-full flex items-center">
           <div className="max-w-3xl">
