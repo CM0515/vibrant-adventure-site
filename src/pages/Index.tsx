@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe } from "lucide-react";
+import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -26,7 +25,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-white shadow-lg" : "bg-transparent backdrop-blur-md"
       }`}>
@@ -61,7 +59,6 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section className="relative h-screen bg-hero-pattern bg-cover bg-center">
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/40 backdrop-blur-[2px]" />
         <div className="container mx-auto px-4 relative h-full flex items-center">
@@ -83,7 +80,6 @@ const Index = () => {
               Explora destinos únicos y crea memorias inolvidables
             </motion.p>
             
-            {/* Search Bar */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -121,7 +117,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Destinations */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="section-title">Destinos Destacados</h2>
@@ -162,7 +157,117 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Statistics */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-primary-light">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-6">
+            <span className="text-primary font-medium">¿Por Qué Elegirnos?</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">Experiencias de Viaje Increíbles</h2>
+            <p className="text-secondary-light max-w-2xl mx-auto">
+              Nos dedicamos a crear experiencias únicas y memorables para nuestros viajeros, 
+              con un compromiso inquebrantable con la calidad y la seguridad.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <div className="relative">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="rounded-2xl overflow-hidden aspect-[4/3]"
+              >
+                <img 
+                  src="/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png"
+                  alt="Experiencia de viaje"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl max-w-xs"
+              >
+                <div className="flex gap-4 mb-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <Clock className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">10+ Años</h3>
+                    <p className="text-sm text-secondary-light">de experiencia</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <Plane className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">150+ Destinos</h3>
+                    <p className="text-sm text-secondary-light">alrededor del mundo</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white p-6 rounded-xl shadow-md flex gap-4 items-start"
+              >
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Shield className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Seguridad Primero</h3>
+                  <p className="text-secondary-light">
+                    Tu seguridad es nuestra prioridad. Trabajamos con los mejores proveedores y seguimos 
+                    estrictos protocolos de seguridad en todos nuestros tours.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="bg-white p-6 rounded-xl shadow-md flex gap-4 items-start"
+              >
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Mountain className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Aventuras Únicas</h3>
+                  <p className="text-secondary-light">
+                    Diseñamos experiencias exclusivas que combinan aventura, cultura y confort, 
+                    adaptadas a tus preferencias y estilo de viaje.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="bg-white p-6 rounded-xl shadow-md flex gap-4 items-start"
+              >
+                <div className="bg-primary/10 p-3 rounded-full">
+                  <Users className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Guías Expertos</h3>
+                  <p className="text-secondary-light">
+                    Nuestros guías son profesionales apasionados con amplio conocimiento local, 
+                    asegurando una experiencia enriquecedora y memorable.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-primary-light">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
