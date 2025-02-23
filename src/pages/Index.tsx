@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Index = () => {
   const [searchDestination, setSearchDestination] = useState("");
@@ -296,6 +296,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };
