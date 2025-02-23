@@ -39,11 +39,9 @@ export default {
           light: "#FEC6A1",
         },
       },
-      backgroundImage: {
-        'hero-pattern': "url('/lovable-uploads/cc5567a7-b705-423a-99ff-9f62c83ed1e8.png')",
-      },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
+        serif: ["Playfair Display", "serif"],
       },
       keyframes: {
         "slide-up": {
