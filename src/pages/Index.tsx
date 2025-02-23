@@ -3,9 +3,11 @@ import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mount
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+
 const Index = () => {
   const [searchDestination, setSearchDestination] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -14,52 +16,47 @@ const Index = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const featuredDestinations = [{
     id: 1,
-    name: "Santorini",
+    name: "El Carito",
     image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
-    price: "1,299"
+    price: "50"
   }, {
     id: 2,
-    name: "Maldivas",
+    name: "Lorica",
     image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
-    price: "1,599"
+    price: "80"
   }, {
     id: 3,
-    name: "París",
+    name: "Tuchín",
     image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
-    price: "999"
+    price: "60"
   }, {
     id: 4,
-    name: "Bali",
+    name: "San Antero",
     image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
-    price: "1,099"
+    price: "70"
   }];
+
   const destinations = [{
-    title: "Ciénaga de Bañó",
-    description: "Un espectacular humedal a solo 20 minutos de Lorica, hogar de diversas especies de aves y la tortuga de río. Ideal para el ecoturismo y la observación de fauna.",
+    title: "El Carito",
+    description: "Pintoresco corregimiento ubicado a orillas del río Sinú, famoso por sus hermosos paisajes y la calidez de su gente. Ideal para disfrutar de la gastronomía local y paseos en canoa.",
     image: "https://www.eluniversal.com.co/binrepository/1050x700/0c0/0d0/none/13704/NLKI/whatsapp-image-2020-11-27-at-10-52_4766141_20201127111225.jpg"
   }, {
-    title: "San Antero",
-    description: "Pintoresco municipio costero a 45 minutos de Lorica, famoso por su Festival del Burro y sus hermosas playas. Disfruta de la gastronomía local y el ambiente caribeño.",
+    title: "Santa Cruz de Lorica",
+    description: "Ciudad histórica conocida como la 'Pequeña Cartagena', destaca por su arquitectura colonial, su mercado público y su rica mezcla cultural árabe-caribeña. Un destino imperdible para los amantes de la historia y la cultura.",
     image: "https://www.elheraldo.co/sites/default/files/articulo/2020/04/09/san_antero.jpg"
   }, {
-    title: "San Bernardo del Viento",
-    description: "A solo 40 minutos de Lorica, este municipio ofrece hermosas playas, manglares y la desembocadura del río Sinú. Perfecto para actividades acuáticas y pesca artesanal.",
+    title: "Tuchín",
+    description: "Cuna del Sombrero Vueltiao y capital artesanal de Córdoba. Descubre el proceso de elaboración de este símbolo nacional y conoce la rica cultura indígena Zenú.",
     image: "https://www.elheraldo.co/sites/default/files/articulo/2021/01/16/playa_3.jpg"
   }, {
-    title: "Cotocá Arriba",
-    description: "Corregimiento histórico a 15 minutos de Lorica, conocido por su artesanía en caña flecha y su rica tradición cultural sinuana. Visita sus talleres artesanales.",
+    title: "San Antero",
+    description: "Municipio costero famoso por su Festival del Burro y sus hermosas playas. Disfruta del mejor pescado fresco, deportes acuáticos y espectaculares atardeceres caribeños.",
     image: "https://www.larazon.co/wp-content/uploads/2020/08/Cotoca%CC%81-Arriba.jpg"
-  }, {
-    title: "Momil",
-    description: "A 20 minutos de Lorica, esta población es reconocida por sus sitios arqueológicos zenúes y la Ciénaga Grande. Un destino perfecto para los amantes de la historia.",
-    image: "https://www.eluniversal.com.co/binrepository/1200x800/0c0/0d0/none/13704/WEHH/parque-momil_4343246_20200119114158.jpg"
-  }, {
-    title: "Purísima",
-    description: "Municipio ribereño a 10 minutos de Lorica, famoso por sus dulces típicos y artesanías. Disfruta de sus festivales culturales y la vida tranquila junto al río Sinú.",
-    image: "https://www.elheraldo.co/sites/default/files/articulo/2020/07/24/purisima.jpeg"
   }];
+
   return <div className="min-h-screen">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-lg" : "bg-transparent backdrop-blur-md"}`}>
         <div className="container mx-auto px-4 py-4">
@@ -348,4 +345,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
