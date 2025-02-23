@@ -25,6 +25,39 @@ const Index = () => {
     { id: 4, name: "Bali", image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png", price: "1,099" },
   ];
 
+  const destinations = [
+    {
+      title: "Ciénaga de Bañó",
+      description: "Un espectacular humedal a solo 20 minutos de Lorica, hogar de diversas especies de aves y la tortuga de río. Ideal para el ecoturismo y la observación de fauna.",
+      image: "https://www.eluniversal.com.co/binrepository/1050x700/0c0/0d0/none/13704/NLKI/whatsapp-image-2020-11-27-at-10-52_4766141_20201127111225.jpg"
+    },
+    {
+      title: "San Antero",
+      description: "Pintoresco municipio costero a 45 minutos de Lorica, famoso por su Festival del Burro y sus hermosas playas. Disfruta de la gastronomía local y el ambiente caribeño.",
+      image: "https://www.elheraldo.co/sites/default/files/articulo/2020/04/09/san_antero.jpg"
+    },
+    {
+      title: "San Bernardo del Viento",
+      description: "A solo 40 minutos de Lorica, este municipio ofrece hermosas playas, manglares y la desembocadura del río Sinú. Perfecto para actividades acuáticas y pesca artesanal.",
+      image: "https://www.elheraldo.co/sites/default/files/articulo/2021/01/16/playa_3.jpg"
+    },
+    {
+      title: "Cotocá Arriba",
+      description: "Corregimiento histórico a 15 minutos de Lorica, conocido por su artesanía en caña flecha y su rica tradición cultural sinuana. Visita sus talleres artesanales.",
+      image: "https://www.larazon.co/wp-content/uploads/2020/08/Cotoca%CC%81-Arriba.jpg"
+    },
+    {
+      title: "Momil",
+      description: "A 20 minutos de Lorica, esta población es reconocida por sus sitios arqueológicos zenúes y la Ciénaga Grande. Un destino perfecto para los amantes de la historia.",
+      image: "https://www.eluniversal.com.co/binrepository/1200x800/0c0/0d0/none/13704/WEHH/parque-momil_4343246_20200119114158.jpg"
+    },
+    {
+      title: "Purísima",
+      description: "Municipio ribereño a 10 minutos de Lorica, famoso por sus dulces típicos y artesanías. Disfruta de sus festivales culturales y la vida tranquila junto al río Sinú.",
+      image: "https://www.elheraldo.co/sites/default/files/articulo/2020/07/24/purisima.jpeg"
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -293,6 +326,50 @@ const Index = () => {
               <div className="text-4xl font-bold mb-2">4.8</div>
               <div className="text-secondary-light">Calificación Promedio</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+              Explora los Alrededores de Santa Cruz de Lorica
+            </h2>
+            <p className="text-secondary-light max-w-2xl mx-auto">
+              Descubre la magia de los destinos cercanos a Lorica, cada uno con su propia historia y encanto único
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {destinations.map((destination, index) => (
+              <motion.div
+                key={destination.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="card group"
+              >
+                <div className="relative h-64 overflow-hidden rounded-t-xl">
+                  <img
+                    src={destination.image}
+                    alt={destination.title}
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-serif font-semibold mb-2">{destination.title}</h3>
+                  <p className="text-secondary-light">{destination.description}</p>
+                  <button className="mt-4 btn-primary w-full">Explorar</button>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
