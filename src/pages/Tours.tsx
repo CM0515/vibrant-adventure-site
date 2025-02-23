@@ -62,7 +62,7 @@ const Tours = () => {
       }`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <img 
                 src="https://lh3.googleusercontent.com/a/ACg8ocLolP-oDXrcJRUDaixu8hEJLoPstVHIA4lCPvE7x49PkcIfTC8=s288-c-no" 
                 alt="GoTours Logo" 
@@ -71,7 +71,7 @@ const Tours = () => {
               <span className={`text-2xl font-bold transition-colors duration-300 ${
                 isScrolled ? "text-secondary" : "text-white"
               }`}>GoTours</span>
-            </div>
+            </Link>
             <div className="hidden md:flex items-center space-x-8">
               <Link to="/" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
@@ -79,14 +79,14 @@ const Tours = () => {
               <Link to="/tours" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
               }`}>Tours</Link>
-              <Link to="#" className={`transition-colors duration-300 ${
+              <Link to="/about" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
               }`}>Sobre Nosotros</Link>
-              <Link to="#" className={`transition-colors duration-300 ${
+              <Link to="/contact" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
               }`}>Contacto</Link>
             </div>
-            <button className="btn-primary">Reserva Ahora</button>
+            <Link to="/reserva" className="btn-primary">Reserva Ahora</Link>
           </div>
         </div>
       </nav>
@@ -249,15 +249,15 @@ const Tours = () => {
             <div>
               <h4 className="font-serif text-xl mb-4">Síguenos</h4>
               <div className="flex space-x-4">
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link to="#" className="hover:text-primary transition-colors">
                   <Facebook className="w-6 h-6" />
-                </a>
-                <a href="#" className="hover:text-primary transition-colors">
+                </Link>
+                <Link to="#" className="hover:text-primary transition-colors">
                   <Instagram className="w-6 h-6" />
-                </a>
-                <a href="#" className="hover:text-primary transition-colors">
+                </Link>
+                <Link to="#" className="hover:text-primary transition-colors">
                   <Twitter className="w-6 h-6" />
-                </a>
+                </Link>
               </div>
             </div>
             <div>
@@ -269,7 +269,7 @@ const Tours = () => {
                   placeholder="Tu correo electrónico"
                   className="flex-1 px-4 py-2 rounded-lg text-secondary"
                 />
-                <button className="bg-primary hover:bg-primary-hover px-6 py-2 rounded-lg transition-colors">
+                <button type="submit" className="bg-primary hover:bg-primary-hover px-6 py-2 rounded-lg transition-colors">
                   Suscribirse
                 </button>
               </form>
