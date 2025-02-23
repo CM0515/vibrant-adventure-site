@@ -55,6 +55,32 @@ const Tours = () => {
     { hora: "8:00 - 9:00 pm", actividad: "Coctel y tertulia 'Viaje en la memoria histórica del Sinú'" }
   ];
 
+  const itinerarioMonteria = [
+    { hora: "7:00 am", actividad: "Inicio de actividad (Transporte terrestre Montería-Hacienda la Quinta)", lugar: "Montería" },
+    { hora: "8:00 am", actividad: "Experiencia sostenible de ganadería personalizada (Incluye cabalgata, desayuno, almuerzo y refrigerio)", lugar: "La Quinta" },
+    { hora: "2:00 pm", actividad: "Traslado La Quinta – Ronda del Sinú, Montería", lugar: "Montería" },
+    { hora: "2:30 pm", actividad: "Tour ronda del Sinú (experiencia sensorial e histórica en la ronda del Sinú", lugar: "Ronda del Sinú" },
+    { hora: "3:30 pm", actividad: "Refrigerio (frutos tropicales)", lugar: "Ronda del Sinú" },
+    { hora: "4:00 pm", actividad: "Tour Río Sinú 'La Majestuosidad Biocultural del Sinú' con hidratación", lugar: "Río Sinú" },
+    { hora: "6:00 pm", actividad: "Alojamiento hotel Florida Sinú", lugar: "Hotel Florida Sinú" },
+    { hora: "7:00 am", actividad: "Desayuno tradicional sabanero", lugar: "Hotel Florida Sinú" },
+    { hora: "8:00 am", actividad: "Traslado de Montería a Ciénaga de Betancí", lugar: "Montería" },
+    { hora: "9:00 am", actividad: "Experiencia cultural de arqueología indígena", lugar: "Betancí" },
+    { hora: "9:30 am", actividad: "Tour comunitario en ciénaga de Betancí (Observación de aves y navegación en lancha)", lugar: "Ciénaga de Betancí" },
+    { hora: "12:00 pm", actividad: "Actividad 'Turismo con propósito Siembra vida, siembro un árbol'", lugar: "Ciénaga de Betancí" },
+    { hora: "12:30 pm", actividad: "Almuerzo tradicional costero (Bocachico frito y sancocho de Bocachico)", lugar: "Ciénaga de Betancí" },
+    { hora: "2:30 pm", actividad: "Fin de la actividad", lugar: "Ciénaga de Betancí" }
+  ];
+
+  const serviciosMonteria = [
+    { servicio: "Transporte Montería", detalle: "Hacienda la quitan - ciénaga de Betancí" },
+    { servicio: "Alimentación (Almuerzo)", detalle: "Almuerzo en la granja de Paul - ciénaga de Betancí" },
+    { servicio: "Refrigerio - hidratación", detalle: "Ronda del Sinú- hacienda la quinta" },
+    { servicio: "Guía profesional en todo el recorrido", detalle: "Guía para el recorrido" },
+    { servicio: "Lancha por el río Sinú", detalle: "Recorrido por el río Sinú" },
+    { servicio: "Seguro de turismo", detalle: "Seguro de asistencia médica" }
+  ];
+
   return (
     <div className="min-h-screen">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -230,6 +256,76 @@ const Tours = () => {
                     riqueza artesanal de Lorica acompañado de muestras folklóricas, una gastronomía rica y con sabor caribe 
                     entre chichas y bocachicos, es una experiencia que pondrá a prueba todos tus sentidos.
                   </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Tour 3 - Montería */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 hover:shadow-2xl transition-shadow duration-300"
+            >
+              <div className="flex flex-col md:flex-row justify-between gap-6 mb-6 border-b border-gray-100 pb-6">
+                <div>
+                  <h2 className="text-2xl font-serif font-semibold mb-2">TRADICIÓN GANADERA, CULTURA Y NATURALEZA EN "LA PERLA DEL SINÚ"</h2>
+                  <div className="flex items-center gap-2 text-primary mb-2">
+                    <Clock className="w-5 h-5" />
+                    <span>2 Días, 1 Noche</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-primary">
+                    <MapPin className="w-5 h-5" />
+                    <span>Montería - "Donde la tradición ganadera y la naturaleza elevan tus sentidos"</span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-primary mb-1">
+                    $1.280.000
+                  </div>
+                  <div className="text-secondary-light">Por persona (Grupo 6 personas)</div>
+                  <button className="mt-4 btn-primary">
+                    Reservar Ahora
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                <div className="bg-primary-light/30 rounded-xl p-6">
+                  <h3 className="text-xl font-serif font-semibold mb-3">Descripción</h3>
+                  <p className="text-secondary-light">
+                    Situada en el corazón del departamento de Córdoba, pasando por ella el majestuoso río Sinú, Montería es 
+                    una ciudad vibrante y llena de encanto. Conocida como la Perla del Sinú, ofrece una mezcla única de 
+                    naturaleza, cultura, gastronomía y modernidad que la convierte en un destino imperdible.
+                  </p>
+                </div>
+
+                <div className="bg-primary-light/30 rounded-xl p-6">
+                  <h3 className="text-xl font-serif font-semibold mb-3">Incluye</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {serviciosMonteria.map((item, index) => (
+                      <div key={index} className="flex flex-col">
+                        <span className="font-medium">{item.servicio}</span>
+                        {item.detalle && <span className="text-sm text-secondary-light">{item.detalle}</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-serif font-semibold mb-4">Itinerario</h3>
+                  {itinerarioMonteria.map((item, index) => (
+                    <div 
+                      key={index} 
+                      className="flex gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                    >
+                      <div className="w-32 font-medium text-primary">{item.hora}</div>
+                      <div className="flex-1">
+                        <div>{item.actividad}</div>
+                        <div className="text-sm text-secondary-light">{item.lugar}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
