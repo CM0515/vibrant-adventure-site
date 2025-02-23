@@ -1,3 +1,4 @@
+
 import { Clock, MapPin, Mail, Facebook, Instagram, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -15,6 +16,44 @@ const Tours = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const itinerarioNaturaleza = [
+    { hora: "06:45 am", actividad: "Bienvenida e indicaciones (Puerto de embarque Centro Histórico de Lorica)" },
+    { hora: "07:00 am", actividad: "Recorrido náutico biocultural por el río Sinú Lorica-Cotocá Arriba" },
+    { hora: "08:00 am", actividad: "Recepción en Centro ecoturístico 'Econbiba' y desayuno campesino" },
+    { hora: "08:45 am", actividad: "Recorrido ambiental por el Distrito de Conservación de Suelos 'Ciénaga de Bañó' en canoa con guianza nativa – observación de aves." },
+    { hora: "11:00 am", actividad: "Refrigerio" },
+    { hora: "11:30 am", actividad: "Experiencia 'turismo con propósito, adopta una tortuga'" },
+    { hora: "12:30 pm", actividad: "Recorrido náutico bio cultural por el río Sinú Cotocá Arriba-Lorica" },
+    { hora: "13:30 pm", actividad: "Almuerzo tradicional sinuano en el mercado público de Lorica" },
+    { hora: "3:00 pm", actividad: "Recorrido guiado (City Tour) centro histórico Santa Cruz de Lorica" },
+    { hora: "5:00 pm", actividad: "Muestra folklórica bajo sinuana (Pitos y tambores) con hidratación" },
+    { hora: "5:30 pm", actividad: "Finalización de la jornada" }
+  ];
+
+  const serviciosIncluidos = [
+    { servicio: "Transporte náutico por el río Sinú", detalle: "Recorrido en lancha a motor fuera de borda" },
+    { servicio: "Acompañamiento", detalle: "Equipo Go Tour" },
+    { servicio: "Recorrido por el centro histórico", detalle: "Recorrido guiado" },
+    { servicio: "Transporte acuático por Ciénaga", detalle: "Canoas, chalecos, binoculares, guía" },
+    { servicio: "Alimentación", detalle: "Almuerzo sinuano" },
+    { servicio: "Refrigerio e hidratación", detalle: "" },
+    { servicio: "Guianza profesional", detalle: "En todos los recorridos" },
+    { servicio: "Seguro médico", detalle: "Seguro de asistencia médica" }
+  ];
+
+  const itinerarioDia1 = [
+    { hora: "8:00 - 8:30 am", actividad: "Bienvenida en el aeropuerto y entrega de un delantal de cocina vueltioo marcado." },
+    { hora: "8:30 - 9:30 am", actividad: "Traslado aeropuerto de Montería a Santa Cruz de Lorica" },
+    { hora: "9:30 -10:30 am", actividad: "Recibimiento con muestra folklórica y desayuno tradicional en el mercado público" },
+    { hora: "10:30 - 11:00 am", actividad: "Instalación en hotel Onoma" },
+    { hora: "11:00 - 1:00 pm", actividad: "Visita dentro artesanal Marcial Alegría, Experiencia 'Pintando el Pensamiento'" },
+    { hora: "1:00 - 3:00 pm", actividad: "Almuerzo tradicional sinuano en el restaurante La Mula" },
+    { hora: "3:00 - 4:00 pm", actividad: "Tiempo de descanso" },
+    { hora: "4:00 - 6:30 pm", actividad: "City tour cultural en el centro histórico de Santa Cruz de Lorica" },
+    { hora: "6:30 - 8:00 pm", actividad: "Cena romántica en Las Delicias de la abuela" },
+    { hora: "8:00 - 9:00 pm", actividad: "Coctel y tertulia 'Viaje en la memoria histórica del Sinú'" }
+  ];
 
   return (
     <div className="min-h-screen">
@@ -69,6 +108,7 @@ const Tours = () => {
           </motion.div>
 
           <div className="space-y-8">
+            {/* Tour 1 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -110,18 +150,7 @@ const Tours = () => {
                 <div>
                   <h3 className="text-xl font-serif font-semibold mb-4">Día 1</h3>
                   <div className="space-y-4">
-                    {[
-                      { hora: "8:00 - 8:30 am", actividad: "Bienvenida en el aeropuerto y entrega de un delantal de cocina vueltioo marcado." },
-                      { hora: "8:30 - 9:30 am", actividad: "Traslado aeropuerto de Montería a Santa Cruz de Lorica" },
-                      { hora: "9:30 -10:30 am", actividad: "Recibimiento con muestra folklórica y desayuno tradicional en el mercado público" },
-                      { hora: "10:30 - 11:00 am", actividad: "Instalación en hotel Onoma" },
-                      { hora: "11:00 - 1:00 pm", actividad: 'Visita dentro artesanal Marcial Alegría, Experiencia "Pintando el Pensamiento"' },
-                      { hora: "1:00 - 3:00 pm", actividad: "Almuerzo tradicional sinuano en el restaurante La Mula" },
-                      { hora: "3:00 - 4:00 pm", actividad: "Tiempo de descanso" },
-                      { hora: "4:00 - 6:30 pm", actividad: "City tour cultural en el centro histórico de Santa Cruz de Lorica (Historia, literatura, arquitectura, entrada a iglesia)" },
-                      { hora: "6:30 - 8:00 pm", actividad: "Cena romántica en Las Delicias de la abuela" },
-                      { hora: "8:00 - 9:00 pm", actividad: 'Coctel y tertulia "Viaje en la memoria histórica del Sinú"' }
-                    ].map((item, index) => (
+                    {itinerarioDia1.map((item, index) => (
                       <div 
                         key={index} 
                         className="flex gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
@@ -135,6 +164,7 @@ const Tours = () => {
               </div>
             </motion.div>
 
+            {/* Tour 2 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -168,16 +198,7 @@ const Tours = () => {
                 <div className="bg-primary-light/30 rounded-xl p-6">
                   <h3 className="text-xl font-serif font-semibold mb-3">Incluye</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[
-                      { servicio: "Transporte náutico por el río Sinú", detalle: "Recorrido en lancha a motor fuera de borda" },
-                      { servicio: "Acompañamiento", detalle: "Equipo Go Tour" },
-                      { servicio: "Recorrido por el centro histórico", detalle: "Recorrido guiado" },
-                      { servicio: "Transporte acuático por Ciénaga", detalle: "Canoas, chalecos, binoculares, guía" },
-                      { servicio: "Alimentación", detalle: "Almuerzo sinuano" },
-                      { servicio: "Refrigerio e hidratación", detalle: "" },
-                      { servicio: "Guianza profesional", detalle: "En todos los recorridos" },
-                      { servicio: "Seguro médico", detalle: "Seguro de asistencia médica" }
-                    ].map((item, index) => (
+                    {serviciosIncluidos.map((item, index) => (
                       <div key={index} className="flex flex-col">
                         <span className="font-medium">{item.servicio}</span>
                         {item.detalle && <span className="text-sm text-secondary-light">{item.detalle}</span>}
@@ -188,19 +209,7 @@ const Tours = () => {
 
                 <div className="space-y-4">
                   <h3 className="text-xl font-serif font-semibold mb-4">Itinerario</h3>
-                  {[
-                    { hora: "06:45 am", actividad: "Bienvenida e indicaciones (Puerto de embarque Centro Histórico de Lorica)" },
-                    { hora: "07:00 am", actividad: "Recorrido náutico biocultural por el río Sinú Lorica-Cotocá Arriba" },
-                    { hora: "08:00 am", actividad: "Recepción en Centro ecoturístico "Econbiba" y desayuno campesino" },
-                    { hora: "08:45 am", actividad: "Recorrido ambiental por el Distrito de Conservación de Suelos "Ciénaga de Bañó" en canoa con guianza nativa – observación de aves." },
-                    { hora: "11:00 am", actividad: "Refrigerio" },
-                    { hora: "11:30 am", actividad: "Experiencia "turismo con propósito, adopta una tortuga"" },
-                    { hora: "12:30 pm", actividad: "Recorrido náutico bio cultural por el río Sinú Cotocá Arriba-Lorica" },
-                    { hora: "13:30 pm", actividad: "Almuerzo tradicional sinuano en el mercado público de Lorica" },
-                    { hora: "3:00 pm", actividad: "Recorrido guiado (City Tour) centro histórico Santa Cruz de Lorica, Pueblo patrimonio (entrada a casas patrimoniales, mercado público, alcaldía municipal, y murales entre otros." },
-                    { hora: "5:00 pm", actividad: "Muestra folklórica bajo sinuana (Pitos y tambores) con hidratación de frutos tropicales y dulce típico" },
-                    { hora: "5:30 pm", actividad: "Finalización de la jornada" }
-                  ].map((item, index) => (
+                  {itinerarioNaturaleza.map((item, index) => (
                     <div 
                       key={index} 
                       className="flex gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
@@ -216,7 +225,7 @@ const Tours = () => {
                     Santa Cruz de Lorica – Río Sinú: El pueblo patrimonio con huellas Sirio-Libanesas en el Golfo de 
                     Morrosquillo es el escenario perfecto para vivir una experiencia turística inolvidable. Navegar por el 
                     majestuoso río Sinú y adentrarse en la Ciénaga de Bañó para observar y disfrutar de la variedad de aves, 
-                    participar del programa "Tortugas del Sinú" para conservar la hermosa Tortuga de Rio, endémica de 
+                    participar del programa 'Tortugas del Sinú' para conservar la hermosa Tortuga de Rio, endémica de 
                     Colombia en compañía de comunidades ribereñas de pescadores, llegar a descubrir la arquitectura y 
                     riqueza artesanal de Lorica acompañado de muestras folklóricas, una gastronomía rica y con sabor caribe 
                     entre chichas y bocachicos, es una experiencia que pondrá a prueba todos tus sentidos.
