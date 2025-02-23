@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
@@ -59,8 +60,9 @@ const Index = () => {
         </div>
       </nav>
 
-      <section className="relative h-screen bg-hero-pattern bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/40 backdrop-blur-[2px]" />
+      <section className="relative h-screen">
+        <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center bg-no-repeat" />
+        <div className="absolute inset-0 bg-black/40" />
         <div className="container mx-auto px-4 relative h-full flex items-center">
           <div className="max-w-3xl">
             <motion.h1 
