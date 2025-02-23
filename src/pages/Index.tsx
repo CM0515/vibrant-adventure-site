@@ -197,7 +197,7 @@ const Index = () => {
             }} transition={{
               duration: 0.5
             }} className="rounded-2xl overflow-hidden aspect-[4/3]">
-                <img src="/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png" alt="Experiencia de viaje" className="w-full h-full object-cover" />
+                <img alt="Experiencia de viaje" className="w-full h-full object-cover" src="/lovable-uploads/19ea96e8-e92d-4321-b4f8-14c7509c8dd4.jpg" />
               </motion.div>
               <motion.div initial={{
               opacity: 0,
