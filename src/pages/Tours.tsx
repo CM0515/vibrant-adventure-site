@@ -53,7 +53,7 @@ const Tours = () => {
         </div>
       </nav>
 
-      <section className="py-12 bg-gradient-to-br from-primary-light to-white">
+      <section className="pt-32 pb-12 bg-gradient-to-br from-primary-light to-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
