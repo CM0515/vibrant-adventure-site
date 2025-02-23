@@ -59,12 +59,12 @@ const Tours = () => {
                     { hora: "8:30 - 9:30 am", actividad: "Traslado aeropuerto de Montería a Santa Cruz de Lorica" },
                     { hora: "9:30 -10:30 am", actividad: "Recibimiento con muestra folklórica y desayuno tradicional en el mercado público" },
                     { hora: "10:30 - 11:00 am", actividad: "Instalación en hotel Onoma" },
-                    { hora: "11:00 - 1:00 pm", actividad: "Visita dentro artesanal Marcial Alegría, Experiencia "Pintando el Pensamiento"" },
+                    { hora: "11:00 - 1:00 pm", actividad: 'Visita dentro artesanal Marcial Alegría, Experiencia "Pintando el Pensamiento"' },
                     { hora: "1:00 - 3:00 pm", actividad: "Almuerzo tradicional sinuano en el restaurante La Mula" },
                     { hora: "3:00 - 4:00 pm", actividad: "Tiempo de descanso" },
                     { hora: "4:00 - 6:30 pm", actividad: "City tour cultural en el centro histórico de Santa Cruz de Lorica (Historia, literatura, arquitectura, entrada a iglesia)" },
                     { hora: "6:30 - 8:00 pm", actividad: "Cena romántica en Las Delicias de la abuela" },
-                    { hora: "8:00 - 9:00 pm", actividad: "Coctel y tertulia "Viaje en la memoria histórica del Sinú"" }
+                    { hora: "8:00 - 9:00 pm", actividad: 'Coctel y tertulia "Viaje en la memoria histórica del Sinú"' }
                   ].map((item, index) => (
                     <div key={index} className="flex gap-4 p-4 bg-gray-50 rounded-lg">
                       <div className="w-32 font-medium text-primary">{item.hora}</div>
