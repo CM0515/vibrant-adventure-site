@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [searchDestination, setSearchDestination] = useState("");
@@ -42,18 +43,18 @@ const Index = () => {
               }`}>GoTours</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className={`transition-colors duration-300 ${
+              <Link to="/" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Inicio</a>
-              <a href="#" className={`transition-colors duration-300 ${
+              }`}>Inicio</Link>
+              <Link to="/tours" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Tours</a>
-              <a href="#" className={`transition-colors duration-300 ${
+              }`}>Tours</Link>
+              <Link to="#" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Sobre Nosotros</a>
-              <a href="#" className={`transition-colors duration-300 ${
+              }`}>Sobre Nosotros</Link>
+              <Link to="#" className={`transition-colors duration-300 ${
                 isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Contacto</a>
+              }`}>Contacto</Link>
             </div>
             <button className="btn-primary">Reserva Ahora</button>
           </div>
