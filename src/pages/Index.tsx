@@ -62,7 +62,7 @@ const Index = () => {
 
       <section className="relative h-screen">
         <img 
-          src="/lovable-uploads/cc5567a7-b705-423a-99ff-9f62c83ed1e8.png"
+          src="/lovable-uploads/cc5567a7-b705-423a-99ff-9f62c83ed1e8.jpg"
           alt="Hero background"
           className="absolute inset-0 w-full h-full object-cover"
         />
