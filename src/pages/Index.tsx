@@ -26,7 +26,7 @@ const Index = () => {
   }, {
     id: 2,
     name: "Lorica",
-    image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
+    image: "/lovable-uploads/c934c81b-7c90-483c-b33c-460280404c0f.png",
     price: "80"
   }, {
     id: 3,
@@ -47,7 +47,7 @@ const Index = () => {
   }, {
     title: "Santa Cruz de Lorica",
     description: "Ciudad histórica conocida como la 'Pequeña Cartagena', destaca por su arquitectura colonial, su mercado público y su rica mezcla cultural árabe-caribeña. Un destino imperdible para los amantes de la historia y la cultura.",
-    image: "https://www.elheraldo.co/sites/default/files/articulo/2020/04/09/san_antero.jpg"
+    image: "/lovable-uploads/c934c81b-7c90-483c-b33c-460280404c0f.png"
   }, {
     title: "Tuchín",
     description: "Cuna del Sombrero Vueltiao y capital artesanal de Córdoba. Descubre el proceso de elaboración de este símbolo nacional y conoce la rica cultura indígena Zenú.",
