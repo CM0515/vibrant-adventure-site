@@ -31,7 +31,7 @@ const Index = () => {
   }, {
     id: 3,
     name: "Tuchín",
-    image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
+    image: "/lovable-uploads/755d0928-e7cb-4b51-a819-af0713643e41.png",
     price: "60"
   }, {
     id: 4,
@@ -51,7 +51,7 @@ const Index = () => {
   }, {
     title: "Tuchín",
     description: "Cuna del Sombrero Vueltiao y capital artesanal de Córdoba. Descubre el proceso de elaboración de este símbolo nacional y conoce la rica cultura indígena Zenú.",
-    image: "https://www.elheraldo.co/sites/default/files/articulo/2021/01/16/playa_3.jpg"
+    image: "/lovable-uploads/755d0928-e7cb-4b51-a819-af0713643e41.png"
   }, {
     title: "San Antero",
     description: "Municipio costero famoso por su Festival del Burro y sus hermosas playas. Disfruta del mejor pescado fresco, deportes acuáticos y espectaculares atardeceres caribeños.",
