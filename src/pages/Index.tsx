@@ -4,10 +4,13 @@ import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mount
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Index = () => {
   const [searchDestination, setSearchDestination] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,20 +71,21 @@ const Index = () => {
             </Link>
             <div className="hidden md:flex items-center space-x-8">
               <Link to="/" className={`transition-colors duration-300 ${isScrolled ? "text-secondary hover:text-primary" : "text-white hover:text-primary-light"}`}>
-                Inicio
+                {t('nav.home')}
               </Link>
               <Link to="/tours" className={`transition-colors duration-300 ${isScrolled ? "text-secondary hover:text-primary" : "text-white hover:text-primary-light"}`}>
-                Tours
+                {t('nav.tours')}
               </Link>
               <Link to="/about" className={`transition-colors duration-300 ${isScrolled ? "text-secondary hover:text-primary" : "text-white hover:text-primary-light"}`}>
-                Sobre Nosotros
+                {t('nav.about')}
               </Link>
               <Link to="/contact" className={`transition-colors duration-300 ${isScrolled ? "text-secondary hover:text-primary" : "text-white hover:text-primary-light"}`}>
-                Contacto
+                {t('nav.contact')}
               </Link>
+              <LanguageSelector />
             </div>
             <Link to="/contact" className="btn-primary">
-              Reserva Ahora
+              {t('nav.book')}
             </Link>
           </div>
         </div>
