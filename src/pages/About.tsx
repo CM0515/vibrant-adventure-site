@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -58,9 +59,20 @@ const About = () => {
             <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
               {t('about.title')}
             </h1>
-            <p className="text-xl text-secondary-light max-w-2xl mx-auto">
+            <p className="text-xl text-secondary-light max-w-4xl mx-auto mb-8">
               {t('about.subtitle')}
             </p>
+            <div className="space-y-6 text-left max-w-4xl mx-auto">
+              <p className="text-secondary-light leading-relaxed">
+                {t('about.description.1')}
+              </p>
+              <p className="text-secondary-light leading-relaxed">
+                {t('about.description.2')}
+              </p>
+              <p className="text-secondary-light leading-relaxed">
+                {t('about.description.3')}
+              </p>
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -99,28 +111,17 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="bg-white rounded-2xl shadow-xl p-8 mb-12"
           >
-            <h2 className="text-2xl font-serif font-semibold mb-4 text-primary text-center">
+            <h2 className="text-2xl font-serif font-semibold mb-6 text-primary text-center">
               {t('about.values.title')}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <h3 className="font-semibold mb-2">{t('about.values.authenticity')}</h3>
-                <p className="text-secondary-light">
-                  {t('about.values.authenticity.text')}
-                </p>
-              </div>
-              <div className="text-center">
-                <h3 className="font-semibold mb-2">{t('about.values.sustainability')}</h3>
-                <p className="text-secondary-light">
-                  {t('about.values.sustainability.text')}
-                </p>
-              </div>
-              <div className="text-center">
-                <h3 className="font-semibold mb-2">{t('about.values.community')}</h3>
-                <p className="text-secondary-light">
-                  {t('about.values.community.text')}
-                </p>
-              </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {[...Array(10)].map((_, index) => (
+                <div key={index} className="text-center bg-primary/5 rounded-lg p-4">
+                  <p className="font-medium text-secondary">
+                    {t(`about.values.${index + 1}`)}
+                  </p>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
