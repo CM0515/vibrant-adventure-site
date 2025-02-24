@@ -26,7 +26,7 @@ const Index = () => {
   }, {
     id: 2,
     name: "Lorica",
-    image: "/lovable-uploads/c934c81b-7c90-483c-b33c-460280404c0f.png",
+    image: "/lovable-uploads/530f9e82-fe6a-4bb7-981c-4945d5abd9ab.png",
     price: "80"
   }, {
     id: 3,
@@ -47,7 +47,7 @@ const Index = () => {
   }, {
     title: "Santa Cruz de Lorica",
     description: "Ciudad histórica conocida como la 'Pequeña Cartagena', destaca por su arquitectura colonial, su mercado público y su rica mezcla cultural árabe-caribeña. Un destino imperdible para los amantes de la historia y la cultura.",
-    image: "/lovable-uploads/c934c81b-7c90-483c-b33c-460280404c0f.png"
+    image: "/lovable-uploads/530f9e82-fe6a-4bb7-981c-4945d5abd9ab.png"
   }, {
     title: "Tuchín",
     description: "Cuna del Sombrero Vueltiao y capital artesanal de Córdoba. Descubre el proceso de elaboración de este símbolo nacional y conoce la rica cultura indígena Zenú.",
