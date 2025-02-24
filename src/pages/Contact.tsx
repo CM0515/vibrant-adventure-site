@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -81,9 +80,7 @@ const Contact = () => {
             </div>
             <div className="flex items-center gap-4">
               <LanguageSelector />
-              <Link to="/reserva" className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md transition-colors">
-                {t('nav.book')}
-              </Link>
+              <BookButton />
             </div>
           </div>
         </div>
@@ -232,4 +229,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
