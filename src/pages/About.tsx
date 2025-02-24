@@ -1,10 +1,14 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const About = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,12 +33,13 @@ const About = () => {
               <span className="text-2xl font-bold text-secondary">GoTours</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="text-secondary hover:text-primary">Inicio</Link>
-              <Link to="/tours" className="text-secondary hover:text-primary">Tours</Link>
-              <Link to="/about" className="text-secondary hover:text-primary">Sobre Nosotros</Link>
-              <Link to="/contact" className="text-secondary hover:text-primary">Contacto</Link>
+              <Link to="/" className="text-secondary hover:text-primary">{t('nav.home')}</Link>
+              <Link to="/tours" className="text-secondary hover:text-primary">{t('nav.tours')}</Link>
+              <Link to="/about" className="text-secondary hover:text-primary">{t('nav.about')}</Link>
+              <Link to="/contact" className="text-secondary hover:text-primary">{t('nav.contact')}</Link>
+              <LanguageSelector />
             </div>
-            <Link to="/reserva" className="btn-primary">Reserva Ahora</Link>
+            <Link to="/reserva" className="btn-primary">{t('nav.book')}</Link>
           </div>
         </div>
       </nav>

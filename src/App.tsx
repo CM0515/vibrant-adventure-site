@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import Index from "./pages/Index";
 import Tours from "./pages/Tours";
 import About from "./pages/About";
@@ -13,39 +14,45 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Componente para manejar los títulos dinámicos
 const TitleManager = () => {
   const location = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const titles: { [key: string]: string } = {
-      '/': 'GoTours',
-      '/tours': 'Tours | GoTours',
-      '/about': 'Sobre Nosotros | GoTours',
-      '/contact': 'Contacto | GoTours'
+      '/': t('page.home'),
+      '/tours': t('page.tours'),
+      '/about': t('page.about'),
+      '/contact': t('page.contact')
     };
 
-    document.title = titles[location.pathname] || 'GoTours';
-  }, [location]);
+    document.title = titles[location.pathname] || t('page.home');
+  }, [location, t]);
 
   return null;
 };
 
+const AppRoutes = () => (
+  <BrowserRouter>
+    <TitleManager />
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/tours" element={<Tours />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </BrowserRouter>
+);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <TitleManager />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/tours" element={<Tours />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <LanguageProvider>
+        <Toaster />
+        <Sonner />
+        <AppRoutes />
+      </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
