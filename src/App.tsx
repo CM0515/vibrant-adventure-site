@@ -11,6 +11,7 @@ import Tours from "./pages/Tours";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import PQRS from "./pages/PQRS";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,8 @@ const TitleManager = () => {
       '/': t('page.home'),
       '/tours': t('page.tours'),
       '/about': t('page.about'),
-      '/contact': t('page.contact')
+      '/contact': t('page.contact'),
+      '/pqrs': 'PQRS'
     };
 
     document.title = titles[location.pathname] || t('page.home');
@@ -40,6 +42,7 @@ const AppRoutes = () => (
       <Route path="/tours" element={<Tours />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/pqrs" element={<PQRS />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </BrowserRouter>
