@@ -19,6 +19,7 @@ interface PQRSData {
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -51,7 +52,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
     });
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Error in send-pqrs-notification function:", error);
     return new Response(
       JSON.stringify({ error: error.message }),
       {
