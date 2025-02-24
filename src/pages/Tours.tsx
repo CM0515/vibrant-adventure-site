@@ -83,9 +83,7 @@ const Tours = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-light via-white to-orange-50">
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-lg" : "bg-transparent backdrop-blur-md"
-      }`}>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
@@ -94,23 +92,13 @@ const Tours = () => {
                 alt="GoTours Logo" 
                 className="w-10 h-10 rounded-full"
               />
-              <span className={`text-2xl font-bold transition-colors duration-300 ${
-                isScrolled ? "text-secondary" : "text-white"
-              }`}>GoTours</span>
+              <span className="text-2xl font-bold text-secondary">GoTours</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className={`transition-colors duration-300 ${
-                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Inicio</Link>
-              <Link to="/tours" className={`transition-colors duration-300 ${
-                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Tours</Link>
-              <Link to="/about" className={`transition-colors duration-300 ${
-                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Sobre Nosotros</Link>
-              <Link to="/contact" className={`transition-colors duration-300 ${
-                isScrolled ? "text-secondary hover:text-primary" : "nav-link"
-              }`}>Contacto</Link>
+              <Link to="/" className="text-secondary hover:text-primary">Inicio</Link>
+              <Link to="/tours" className="text-secondary hover:text-primary">Tours</Link>
+              <Link to="/about" className="text-secondary hover:text-primary">Sobre Nosotros</Link>
+              <Link to="/contact" className="text-secondary hover:text-primary">Contacto</Link>
             </div>
             <Link to="/reserva" className="btn-primary">Reserva Ahora</Link>
           </div>
