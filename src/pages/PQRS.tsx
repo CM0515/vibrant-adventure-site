@@ -22,6 +22,30 @@ const PQRS = () => {
   const { toast } = useToast();
   const { t } = useLanguage();
 
+  const sendEmailNotification = async (data: PQRSFormData) => {
+    try {
+      const response = await fetch(
+        "https://algyqrycooinowmzxgde.supabase.co/functions/v1/send-pqrs-notification",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al enviar la notificación por correo");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error sending email notification:", error);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -36,11 +60,15 @@ const PQRS = () => {
     };
 
     try {
-      const { error } = await supabase
+      // Guardar en Supabase
+      const { error: supabaseError } = await supabase
         .from('pqrs')
         .insert([data]);
 
-      if (error) throw error;
+      if (supabaseError) throw supabaseError;
+
+      // Enviar notificación por correo
+      await sendEmailNotification(data);
 
       toast({
         title: "PQRS enviada con éxito",
