@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -7,6 +8,7 @@ import Footer from "../components/Footer";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSelector from "../components/LanguageSelector";
 import { supabase } from "@/integrations/supabase/client";
+import { BookButton } from "@/components/BookButton"; // Añadimos esta importación
 
 const Contact = () => {
   const [isScrolled, setIsScrolled] = useState(false);
