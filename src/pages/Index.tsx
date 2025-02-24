@@ -82,11 +82,13 @@ const Index = () => {
               <Link to="/contact" className={`transition-colors duration-300 ${isScrolled ? "text-secondary hover:text-primary" : "text-white hover:text-primary-light"}`}>
                 {t('nav.contact')}
               </Link>
-              <LanguageSelector />
             </div>
-            <Link to="/contact" className="btn-primary">
-              {t('nav.book')}
-            </Link>
+            <div className="flex items-center gap-4">
+              <LanguageSelector />
+              <Link to="/contact" className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md transition-colors">
+                {t('nav.book')}
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
