@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
@@ -25,22 +24,18 @@ const Index = () => {
     id: 1,
     name: "El Carito",
     image: "/lovable-uploads/f2dc979b-e5cb-4583-a0c4-68a70296638a.png",
-    price: "50"
   }, {
     id: 2,
     name: "Lorica",
     image: "/lovable-uploads/530f9e82-fe6a-4bb7-981c-4945d5abd9ab.png",
-    price: "80"
   }, {
     id: 3,
     name: "Tuchín",
     image: "/lovable-uploads/755d0928-e7cb-4b51-a819-af0713643e41.png",
-    price: "60"
   }, {
     id: 4,
     name: "San Antero",
     image: "/lovable-uploads/2439d93f-1714-461c-b666-17b7cac194c5.png",
-    price: "70"
   }];
 
   const destinations = [{
@@ -168,9 +163,6 @@ const Index = () => {
           }} className="card group">
                 <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
                   <img src={destination.image} alt={destination.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
-                  <div className="absolute top-3 right-3 bg-white rounded-full px-3 py-1 text-sm font-medium text-primary">
-                    ${destination.price}
-                  </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{destination.name}</h3>
                 <div className="flex items-center gap-1 text-primary mb-4">
