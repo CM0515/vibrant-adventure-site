@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
@@ -20,7 +21,7 @@ const Index = () => {
   const featuredDestinations = [{
     id: 1,
     name: "El Carito",
-    image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
+    image: "/lovable-uploads/f2dc979b-e5cb-4583-a0c4-68a70296638a.png",
     price: "50"
   }, {
     id: 2,
@@ -42,7 +43,7 @@ const Index = () => {
   const destinations = [{
     title: "El Carito",
     description: "Pintoresco corregimiento ubicado a orillas del río Sinú, famoso por sus hermosos paisajes y la calidez de su gente. Ideal para disfrutar de la gastronomía local y paseos en canoa.",
-    image: "https://www.eluniversal.com.co/binrepository/1050x700/0c0/0d0/none/13704/NLKI/whatsapp-image-2020-11-27-at-10-52_4766141_20201127111225.jpg"
+    image: "/lovable-uploads/f2dc979b-e5cb-4583-a0c4-68a70296638a.png"
   }, {
     title: "Santa Cruz de Lorica",
     description: "Ciudad histórica conocida como la 'Pequeña Cartagena', destaca por su arquitectura colonial, su mercado público y su rica mezcla cultural árabe-caribeña. Un destino imperdible para los amantes de la historia y la cultura.",
