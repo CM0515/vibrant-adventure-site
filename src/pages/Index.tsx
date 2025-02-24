@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
@@ -36,7 +35,7 @@ const Index = () => {
   }, {
     id: 4,
     name: "San Antero",
-    image: "/lovable-uploads/fa3d9fa4-1d9f-4338-82c5-c601322cb83f.png",
+    image: "/lovable-uploads/2439d93f-1714-461c-b666-17b7cac194c5.png",
     price: "70"
   }];
 
@@ -55,7 +54,7 @@ const Index = () => {
   }, {
     title: "San Antero",
     description: "Municipio costero famoso por su Festival del Burro y sus hermosas playas. Disfruta del mejor pescado fresco, deportes acuáticos y espectaculares atardeceres caribeños.",
-    image: "https://www.larazon.co/wp-content/uploads/2020/08/Cotoca%CC%81-Arriba.jpg"
+    image: "/lovable-uploads/2439d93f-1714-461c-b666-17b7cac194c5.png"
   }];
 
   return <div className="min-h-screen">
