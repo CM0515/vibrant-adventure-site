@@ -28,8 +28,8 @@ const handler = async (req: Request): Promise<Response> => {
     const pqrsData: PQRSData = await req.json();
     
     const emailResponse = await resend.emails.send({
-      from: "GoTours PQRS <gotours.col@gmail.com>",
-      to: ["gotours.col@gmail.com"],
+      from: "GoTours PQRS <info@gotour.com.co>",
+      to: ["info@gotour.com.co"],
       subject: `Nueva PQRS: ${pqrsData.tipo} de ${pqrsData.nombre}`,
       html: `
         <h1>Nueva PQRS Recibida</h1>
