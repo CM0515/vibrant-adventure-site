@@ -2,11 +2,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { MessageCircle, FileText, User, Mail, Phone } from "lucide-react";
 import Footer from "../components/Footer";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSelector from "../components/LanguageSelector";
+import { supabase } from "@/integrations/supabase/client";
+
+interface PQRSFormData {
+  tipo: string;
+  nombre: string;
+  email: string;
+  telefono: string;
+  mensaje: string;
+}
 
 const PQRS = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,24 +27,37 @@ const PQRS = () => {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    const data = {
-      tipo: formData.get('tipo'),
-      nombre: formData.get('nombre'),
-      email: formData.get('email'),
-      telefono: formData.get('telefono'),
-      mensaje: formData.get('mensaje'),
+    const data: PQRSFormData = {
+      tipo: formData.get('tipo') as string,
+      nombre: formData.get('nombre') as string,
+      email: formData.get('email') as string,
+      telefono: formData.get('telefono') as string,
+      mensaje: formData.get('mensaje') as string,
     };
 
-    // Aquí se podría agregar la lógica para enviar el email a info@gotour.com.co
-    // Por ahora simulamos el envío con un timeout
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const { error } = await supabase
+        .from('pqrs')
+        .insert([data]);
+
+      if (error) throw error;
+
       toast({
         title: "PQRS enviada con éxito",
         description: "Nos pondremos en contacto contigo pronto.",
       });
+      
       (e.target as HTMLFormElement).reset();
-    }, 1000);
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error al enviar PQRS",
+        description: "Por favor intenta nuevamente más tarde.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
