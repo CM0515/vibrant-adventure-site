@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import LanguageSelector from "../components/LanguageSelector";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Tours = () => {
   const [isScrolled, setIsScrolled] = useState(false);

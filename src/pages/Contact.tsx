@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import Footer from "../components/Footer";
-import { useLanguage } from "@/context/LanguageContext";
-import LanguageSelector from "@/components/LanguageSelector";
+import { useLanguage } from "../contexts/LanguageContext";
+import LanguageSelector from "../components/LanguageSelector";
 
 const Contact = () => {
   const [isScrolled, setIsScrolled] = useState(false);
