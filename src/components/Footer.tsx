@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return <footer className="bg-secondary text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div>
             <h4 className="font-serif text-xl mb-4">Contacto</h4>
             <address className="not-italic">
@@ -58,6 +58,16 @@ const Footer = () => {
                 Suscribirse
               </button>
             </form>
+          </div>
+          <div>
+            <h4 className="font-serif text-xl mb-4">Aceptamos</h4>
+            <div className="grid grid-cols-2 gap-4">
+              <img 
+                src="public/lovable-uploads/161f1e44-9dda-4726-bda5-4719e9b1943b.png" 
+                alt="Métodos de pago aceptados" 
+                className="col-span-2 w-full max-w-[200px]"
+              />
+            </div>
           </div>
         </div>
         <div className="border-t border-white/10 mt-8 pt-8 text-center text-sm">
