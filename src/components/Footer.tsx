@@ -63,7 +63,7 @@ const Footer = () => {
             <h4 className="font-serif text-xl mb-4">Aceptamos</h4>
             <div className="grid grid-cols-2 gap-4">
               <img 
-                src="public/lovable-uploads/161f1e44-9dda-4726-bda5-4719e9b1943b.png" 
+                src="public/lovable-uploads/ab018bb5-edff-41ba-98c4-1b75ea387447.png" 
                 alt="Métodos de pago aceptados" 
                 className="col-span-2 w-full max-w-[200px]"
               />
