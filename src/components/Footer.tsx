@@ -5,7 +5,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h4 className="font-serif text-xl mb-4">Contáctanos</h4>
+            <h4 className="font-serif text-xl mb-4">Dirección: Calle Principal Cll 4 KR 22, Lorica, Córdoba</h4>
             <p className="mb-2">Email: info@gotours.com.co</p>
             <p className="mb-2">Tel: +57 321 5101331</p>
             <p>Dirección: Calle Principal #123, Montería, Córdoba</p>
