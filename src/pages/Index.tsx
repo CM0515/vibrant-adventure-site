@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
@@ -5,6 +6,7 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import LanguageSelector from "../components/LanguageSelector";
 import { useLanguage } from "../contexts/LanguageContext";
+import { BookButton } from "@/components/BookButton"; // Añadimos esta importación
 
 const Index = () => {
   const [searchDestination, setSearchDestination] = useState("");
@@ -80,9 +82,7 @@ const Index = () => {
             </div>
             <div className="flex items-center gap-4">
               <LanguageSelector />
-              <Link to="/contact" className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md transition-colors">
-                {t('nav.book')}
-              </Link>
+              <BookButton />
             </div>
           </div>
         </div>
