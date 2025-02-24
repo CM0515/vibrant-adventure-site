@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -57,10 +56,10 @@ const About = () => {
             className="text-center mb-12"
           >
             <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-              Sobre Nosotros
+              {t('about.title')}
             </h1>
             <p className="text-xl text-secondary-light max-w-2xl mx-auto">
-              Descubre nuestra pasión por compartir la riqueza cultural y natural de Córdoba
+              {t('about.subtitle')}
             </p>
           </motion.div>
 
@@ -72,14 +71,10 @@ const About = () => {
               className="bg-white rounded-2xl shadow-xl p-8"
             >
               <h2 className="text-2xl font-serif font-semibold mb-4 text-primary">
-                Nuestra Misión
+                {t('about.mission.title')}
               </h2>
               <p className="text-secondary-light leading-relaxed">
-                En Patrimonio Mágico Sinuano, nos dedicamos a crear experiencias turísticas 
-                únicas y memorables que celebran la rica herencia cultural y natural de 
-                Córdoba. Nos comprometemos a promover un turismo sostenible que beneficie 
-                a las comunidades locales mientras preservamos nuestras tradiciones y 
-                recursos naturales para las generaciones futuras.
+                {t('about.mission.text')}
               </p>
             </motion.div>
 
@@ -90,14 +85,10 @@ const About = () => {
               className="bg-white rounded-2xl shadow-xl p-8"
             >
               <h2 className="text-2xl font-serif font-semibold mb-4 text-primary">
-                Nuestra Visión
+                {t('about.vision.title')}
               </h2>
               <p className="text-secondary-light leading-relaxed">
-                Aspiramos a ser líderes en el turismo experiencial en Córdoba, reconocidos 
-                por nuestra excelencia en el servicio, compromiso con la sostenibilidad y 
-                capacidad para crear conexiones significativas entre visitantes y nuestra 
-                cultura local. Buscamos posicionar a Córdoba como un destino turístico 
-                de clase mundial que preserve y celebre su patrimonio único.
+                {t('about.vision.text')}
               </p>
             </motion.div>
           </div>
@@ -109,25 +100,25 @@ const About = () => {
             className="bg-white rounded-2xl shadow-xl p-8 mb-12"
           >
             <h2 className="text-2xl font-serif font-semibold mb-4 text-primary text-center">
-              Nuestros Valores
+              {t('about.values.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
-                <h3 className="font-semibold mb-2">Autenticidad</h3>
+                <h3 className="font-semibold mb-2">{t('about.values.authenticity')}</h3>
                 <p className="text-secondary-light">
-                  Preservamos y compartimos las tradiciones genuinas de nuestra región
+                  {t('about.values.authenticity.text')}
                 </p>
               </div>
               <div className="text-center">
-                <h3 className="font-semibold mb-2">Sostenibilidad</h3>
+                <h3 className="font-semibold mb-2">{t('about.values.sustainability')}</h3>
                 <p className="text-secondary-light">
-                  Protegemos nuestro entorno natural y cultural para el futuro
+                  {t('about.values.sustainability.text')}
                 </p>
               </div>
               <div className="text-center">
-                <h3 className="font-semibold mb-2">Comunidad</h3>
+                <h3 className="font-semibold mb-2">{t('about.values.community')}</h3>
                 <p className="text-secondary-light">
-                  Trabajamos junto a las comunidades locales para un desarrollo inclusivo
+                  {t('about.values.community.text')}
                 </p>
               </div>
             </div>

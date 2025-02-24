@@ -122,10 +122,10 @@ const Tours = () => {
             className="text-center mb-12"
           >
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-secondary mb-4">
-              Nuestros Tours
+              {t('tours.title')}
             </h1>
             <p className="text-xl text-secondary-light">
-              Experiencias únicas en el corazón del Sinú
+              {t('tours.subtitle')}
             </p>
           </motion.div>
 
