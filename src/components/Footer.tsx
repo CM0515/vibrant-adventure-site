@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter, Home, Map, Info, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -19,10 +19,30 @@ const Footer = () => {
             <h4 className="font-serif text-xl mb-4">Enlaces Rápidos</h4>
             <nav aria-label="Enlaces del pie de página">
               <ul className="space-y-2">
-                <li><Link to="/" className="hover:text-primary transition-colors">Inicio</Link></li>
-                <li><Link to="/tours" className="hover:text-primary transition-colors">Tours</Link></li>
-                <li><Link to="/about" className="hover:text-primary transition-colors">Sobre Nosotros</Link></li>
-                <li><Link to="/contact" className="hover:text-primary transition-colors">Contacto</Link></li>
+                <li>
+                  <Link to="/" className="hover:text-primary transition-colors flex items-center gap-2">
+                    <Home size={16} />
+                    Inicio
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/tours" className="hover:text-primary transition-colors flex items-center gap-2">
+                    <Map size={16} />
+                    Tours
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-primary transition-colors flex items-center gap-2">
+                    <Info size={16} />
+                    Sobre Nosotros
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-primary transition-colors flex items-center gap-2">
+                    <Mail size={16} />
+                    Contacto
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
