@@ -19,13 +19,13 @@ const TitleManager = () => {
 
   useEffect(() => {
     const titles: { [key: string]: string } = {
-      '/': 'Inicio | GoTours - Descubre el Patrimonio Mágico Sinuano',
-      '/tours': 'Tours y Experiencias | GoTours - Turismo en Córdoba',
-      '/about': 'Sobre Nosotros | GoTours - Conoce Nuestra Historia',
-      '/contact': 'Contacto | GoTours - ¿Cómo Podemos Ayudarte?'
+      '/': 'GoTours',
+      '/tours': 'Tours | GoTours',
+      '/about': 'Sobre Nosotros | GoTours',
+      '/contact': 'Contacto | GoTours'
     };
 
-    document.title = titles[location.pathname] || 'GoTours - Descubre el Patrimonio Mágico Sinuano';
+    document.title = titles[location.pathname] || 'GoTours';
   }, [location]);
 
   return null;
