@@ -29,16 +29,18 @@ const handler = async (req: Request): Promise<Response> => {
     
     const emailResponse = await resend.emails.send({
       from: "GoTours PQRS <info@gotour.com.co>",
-      to: ["info@gotour.com.co"],
-      subject: `Nueva PQRS: ${pqrsData.tipo} de ${pqrsData.nombre}`,
+      to: [pqrsData.email],
+      subject: `Confirmación de tu PQRS - GoTours`,
       html: `
-        <h1>Nueva PQRS Recibida</h1>
+        <h1>Hemos recibido tu PQRS</h1>
+        <p>Hola ${pqrsData.nombre},</p>
+        <p>Hemos recibido tu ${pqrsData.tipo} correctamente. Nos pondremos en contacto contigo lo antes posible.</p>
+        <h2>Detalles de tu solicitud:</h2>
         <p><strong>Tipo:</strong> ${pqrsData.tipo}</p>
-        <p><strong>Nombre:</strong> ${pqrsData.nombre}</p>
-        <p><strong>Email:</strong> ${pqrsData.email}</p>
-        <p><strong>Teléfono:</strong> ${pqrsData.telefono}</p>
-        <h2>Mensaje:</h2>
-        <p>${pqrsData.mensaje}</p>
+        <p><strong>Mensaje:</strong> ${pqrsData.mensaje}</p>
+        <br/>
+        <p>Si tienes alguna pregunta adicional, no dudes en contactarnos.</p>
+        <p>Saludos cordiales,<br>Equipo GoTours</p>
       `,
     });
 
