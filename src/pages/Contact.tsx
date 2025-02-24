@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -79,7 +80,7 @@ const Contact = () => {
         </div>
       </nav>
 
-      <section className="pt-32 pb-12 bg-gradient-to-br from-primary-light to-white">
+      <section className="pt-32 pb-12">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -87,7 +88,7 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-secondary">
               Contacto
             </h1>
             <p className="text-xl text-secondary-light max-w-2xl mx-auto">
@@ -102,7 +103,7 @@ const Contact = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-8"
             >
-              <div className="bg-white rounded-2xl shadow-xl p-8">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8">
                 <h2 className="text-2xl font-serif font-semibold mb-6 text-primary">
                   Información de Contacto
                 </h2>
@@ -145,7 +146,7 @@ const Contact = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8">
+              <form onSubmit={handleSubmit} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8">
                 <h2 className="text-2xl font-serif font-semibold mb-6 text-primary">
                   Envíanos un Mensaje
                 </h2>
