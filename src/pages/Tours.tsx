@@ -3,10 +3,13 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
+import LanguageSelector from "../components/LanguageSelector";
+import { useLanguage } from "../context/LanguageContext";
 
 const Tours = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  
+  const { t } = useLanguage();
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -82,7 +85,7 @@ const Tours = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-light via-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFF3E8] via-white to-[#FFE4CC]">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -95,12 +98,17 @@ const Tours = () => {
               <span className="text-2xl font-bold text-secondary">GoTours</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="text-secondary hover:text-primary">Inicio</Link>
-              <Link to="/tours" className="text-secondary hover:text-primary">Tours</Link>
-              <Link to="/about" className="text-secondary hover:text-primary">Sobre Nosotros</Link>
-              <Link to="/contact" className="text-secondary hover:text-primary">Contacto</Link>
+              <Link to="/" className="text-secondary hover:text-primary">{t('nav.home')}</Link>
+              <Link to="/tours" className="text-secondary hover:text-primary">{t('nav.tours')}</Link>
+              <Link to="/about" className="text-secondary hover:text-primary">{t('nav.about')}</Link>
+              <Link to="/contact" className="text-secondary hover:text-primary">{t('nav.contact')}</Link>
             </div>
-            <Link to="/reserva" className="btn-primary">Reserva Ahora</Link>
+            <div className="flex items-center gap-4">
+              <LanguageSelector />
+              <Link to="/reserva" className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md transition-colors">
+                {t('nav.book')}
+              </Link>
+            </div>
           </div>
         </div>
       </nav>

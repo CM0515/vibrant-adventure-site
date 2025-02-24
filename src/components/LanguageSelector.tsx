@@ -15,8 +15,8 @@ const LanguageSelector = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="primary" size="default" className="bg-white text-primary hover:bg-white/90">
-          <Globe className="h-4 w-4" />
+        <Button variant="outline" size="default" className="bg-white text-primary hover:bg-white/90">
+          <Globe className="h-4 w-4 mr-2" />
           {language === 'es' ? 'ES' : 'EN'}
         </Button>
       </DropdownMenuTrigger>
