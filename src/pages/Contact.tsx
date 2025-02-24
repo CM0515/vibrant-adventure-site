@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -6,6 +7,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import Footer from "../components/Footer";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSelector from "../components/LanguageSelector";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,14 +36,28 @@ const Contact = () => {
       message: formData.get('message'),
     };
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-notification', {
+        body: data
+      });
+
+      if (error) throw error;
+
       toast({
         title: t('contact.form.success'),
         description: t('contact.form.success.description'),
       });
       (e.target as HTMLFormElement).reset();
-    }, 1000);
+    } catch (error) {
+      console.error('Error sending contact form:', error);
+      toast({
+        variant: "destructive",
+        title: t('contact.form.error'),
+        description: t('contact.form.error.description'),
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -216,3 +232,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
