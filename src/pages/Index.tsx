@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import LanguageSelector from "../components/LanguageSelector";
 import { useLanguage } from "../contexts/LanguageContext";
-import { BookButton } from "@/components/BookButton"; // Añadimos esta importación
+import { BookButton } from "@/components/BookButton";
+import MobileMenu from "@/components/MobileMenu";
 
 const Index = () => {
   const [searchDestination, setSearchDestination] = useState("");
@@ -82,7 +83,10 @@ const Index = () => {
             </div>
             <div className="flex items-center gap-4">
               <LanguageSelector />
-              <BookButton />
+              <div className="hidden md:block">
+                <BookButton />
+              </div>
+              <MobileMenu isScrolled={isScrolled} />
             </div>
           </div>
         </div>
