@@ -32,10 +32,18 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
+    const fullName = formData.get("fullName") as string;
+    const phoneNumber = formData.get("phoneNumber") as string;
 
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: fullName,
+          phone_number: phoneNumber,
+        },
+      },
     });
 
     if (error) {
@@ -155,6 +163,26 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
           </TabsContent>
           <TabsContent value="register">
             <form onSubmit={handleEmailSignUp} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="fullName">Nombre Completo</Label>
+                <Input
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  placeholder="John Doe"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phoneNumber">Número de Teléfono</Label>
+                <Input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="tel"
+                  placeholder="+1234567890"
+                  required
+                />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="email-register">Email</Label>
                 <Input
