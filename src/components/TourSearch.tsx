@@ -108,10 +108,10 @@ export function TourSearch() {
             value={selectedLocation}
             onValueChange={setSelectedLocation}
           >
-            <SelectTrigger className="border-0 ring-0 shadow-none focus:ring-0 focus-visible:ring-0 px-0">
+            <SelectTrigger className="border-0 ring-0 shadow-none focus:ring-0 focus-visible:ring-0 px-0 bg-white">
               <SelectValue placeholder="¿A dónde quieres ir?" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white">
               {locations.map(location => (
                 <SelectItem key={location.id} value={location.id}>
                   {location.name}
@@ -130,7 +130,7 @@ export function TourSearch() {
               <Button
                 variant="outline"
                 className={cn(
-                  "w-full justify-start text-left font-normal border-0 ring-0 shadow-none focus:ring-0 focus-visible:ring-0 px-0",
+                  "w-full justify-start text-left font-normal border-0 ring-0 shadow-none focus:ring-0 focus-visible:ring-0 px-0 bg-white",
                   !selectedDate && "text-muted-foreground"
                 )}
                 disabled={!selectedLocation || isLoadingDates}
@@ -142,7 +142,7 @@ export function TourSearch() {
                 )}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 bg-white" align="start">
               <CalendarComponent
                 mode="single"
                 selected={selectedDate}
@@ -155,6 +155,7 @@ export function TourSearch() {
                   return date < today || !isDateAvailable(date);
                 }}
                 initialFocus
+                className="bg-white"
               />
             </PopoverContent>
           </Popover>
