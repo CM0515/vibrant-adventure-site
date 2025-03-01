@@ -14,16 +14,76 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-import { Facebook, Mail } from "lucide-react";
+import {
+  Check,
+  Eye,
+  EyeOff,
+  Facebook,
+  Info,
+  Mail,
+  X,
+} from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface AuthModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
+// Password strength requirements
+const PASSWORD_REQUIREMENTS = [
+  { id: "uppercase", label: "Al menos una mayúscula", regex: /[A-Z]/ },
+  { id: "lowercase", label: "Al menos una minúscula", regex: /[a-z]/ },
+  { id: "number", label: "Al menos un número", regex: /[0-9]/ },
+  {
+    id: "special",
+    label: "Al menos un carácter especial",
+    regex: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,
+  },
+  { id: "length", label: "Mínimo 8 caracteres", regex: /.{8,}/ },
+];
+
+// List of country codes
+const COUNTRY_CODES = [
+  { code: "+57", name: "Colombia" },
+  { code: "+1", name: "Estados Unidos" },
+  { code: "+52", name: "México" },
+  { code: "+34", name: "España" },
+  { code: "+54", name: "Argentina" },
+  { code: "+56", name: "Chile" },
+  { code: "+51", name: "Perú" },
+  { code: "+593", name: "Ecuador" },
+  { code: "+58", name: "Venezuela" },
+  { code: "+591", name: "Bolivia" },
+  { code: "+595", name: "Paraguay" },
+  { code: "+598", name: "Uruguay" },
+  { code: "+506", name: "Costa Rica" },
+  { code: "+503", name: "El Salvador" },
+  { code: "+502", name: "Guatemala" },
+  { code: "+504", name: "Honduras" },
+  { code: "+505", name: "Nicaragua" },
+  { code: "+507", name: "Panamá" },
+  { code: "+1", name: "Puerto Rico" },
+  { code: "+1", name: "República Dominicana" },
+];
+
 export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [countryCode, setCountryCode] = useState("+57");
   const { toast } = useToast();
+
+  // Check password requirements
+  const checkPasswordRequirement = (requirement: { regex: RegExp }) => {
+    return requirement.regex.test(password);
+  };
 
   const handleEmailSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +93,7 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const fullName = formData.get("fullName") as string;
-    const phoneNumber = formData.get("phoneNumber") as string;
+    const phoneNumber = `${countryCode}${formData.get("phoneNumber") as string}`;
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -175,13 +235,31 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phoneNumber">Número de Teléfono</Label>
-                <Input
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  type="tel"
-                  placeholder="+1234567890"
-                  required
-                />
+                <div className="flex gap-2">
+                  <Select
+                    value={countryCode}
+                    onValueChange={setCountryCode}
+                  >
+                    <SelectTrigger className="w-[110px]">
+                      <SelectValue placeholder="Código" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60">
+                      {COUNTRY_CODES.map((country) => (
+                        <SelectItem key={`${country.code}-${country.name}`} value={country.code}>
+                          {country.code} {country.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    type="tel"
+                    placeholder="3001234567"
+                    className="flex-1"
+                    required
+                  />
+                </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email-register">Email</Label>
@@ -195,12 +273,59 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password-register">Contraseña</Label>
-                <Input
-                  id="password-register"
-                  name="password"
-                  type="password"
-                  required
-                />
+                <div className="relative">
+                  <Input
+                    id="password-register"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 flex items-center px-3"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-500" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-500" />
+                    )}
+                  </button>
+                </div>
+                <div className="mt-2 space-y-2 text-xs">
+                  <p className="font-medium text-muted-foreground flex items-center">
+                    <Info className="h-3 w-3 mr-1" /> La contraseña debe cumplir con:
+                  </p>
+                  <ul className="space-y-1">
+                    {PASSWORD_REQUIREMENTS.map((requirement) => (
+                      <li
+                        key={requirement.id}
+                        className="flex items-center"
+                      >
+                        {checkPasswordRequirement(requirement) ? (
+                          <Check className="h-3 w-3 mr-1 text-green-500" />
+                        ) : (
+                          <X className="h-3 w-3 mr-1 text-red-500" />
+                        )}
+                        <span
+                          className={
+                            checkPasswordRequirement(requirement)
+                              ? "text-green-600"
+                              : "text-muted-foreground"
+                          }
+                        >
+                          {requirement.label}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="font-medium text-muted-foreground mt-2">
+                    Ejemplo: "Gotours2024!"
+                  </p>
+                </div>
               </div>
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Registrando..." : "Registrarse"}
