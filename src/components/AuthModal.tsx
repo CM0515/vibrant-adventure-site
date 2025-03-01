@@ -1,3 +1,4 @@
+
 import {
   Dialog,
   DialogContent,
@@ -78,6 +79,9 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
   const [countryCode, setCountryCode] = useState("+57");
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
+  const [isResendingEmail, setIsResendingEmail] = useState(false);
+  const [emailToVerify, setEmailToVerify] = useState("");
+  const [showVerificationInfo, setShowVerificationInfo] = useState(false);
   const { toast } = useToast();
 
   const checkPasswordRequirement = (requirement: { regex: RegExp }) => {
@@ -149,6 +153,7 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
     e.preventDefault();
     setIsLoading(true);
     setLoginError("");
+    setShowVerificationInfo(false);
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
@@ -166,6 +171,13 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
 
       if (error) {
         setLoginError(error.message);
+        
+        // Verificamos si el error es de correo no confirmado
+        if (error.message.includes("Email not confirmed")) {
+          setEmailToVerify(email);
+          setShowVerificationInfo(true);
+        }
+        
         toast({
           variant: "destructive",
           title: "Error al iniciar sesión",
@@ -189,6 +201,37 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
       console.error("Error en inicio de sesión:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleResendVerificationEmail = async () => {
+    if (!emailToVerify) return;
+    
+    setIsResendingEmail(true);
+    try {
+      const response = await supabase.functions.invoke("resend-verification", {
+        body: { email: emailToVerify },
+      });
+      
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+      
+      toast({
+        variant: "success",
+        title: "Correo enviado",
+        description: "El correo de verificación ha sido reenviado exitosamente",
+      });
+      
+    } catch (error) {
+      console.error("Error al reenviar correo de verificación:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "No se pudo reenviar el correo de verificación",
+      });
+    } finally {
+      setIsResendingEmail(false);
     }
   };
 
@@ -262,6 +305,8 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
                   type="email"
                   placeholder="tu@email.com"
                   required
+                  value={emailToVerify}
+                  onChange={(e) => setEmailToVerify(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
@@ -290,6 +335,34 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
               {loginError && (
                 <div className="text-destructive text-sm">{loginError}</div>
               )}
+              
+              {showVerificationInfo && (
+                <div className="rounded-md bg-amber-50 p-4 border border-amber-200">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <Info className="h-5 w-5 text-amber-400" aria-hidden="true" />
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-amber-800">Verificación pendiente</h3>
+                      <div className="mt-2 text-sm text-amber-700">
+                        <p>
+                          Tu correo electrónico no ha sido verificado. Haz clic en el enlace que te enviamos o solicita uno nuevo.
+                        </p>
+                        <Button
+                          type="button" 
+                          variant="outline"
+                          className="mt-2 w-full border-amber-300 hover:border-amber-400 bg-amber-50 hover:bg-amber-100 text-amber-700"
+                          onClick={handleResendVerificationEmail}
+                          disabled={isResendingEmail}
+                        >
+                          {isResendingEmail ? "Enviando..." : "Reenviar correo de verificación"}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
               </Button>
