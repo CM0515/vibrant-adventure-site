@@ -10,7 +10,7 @@ export function BookButton() {
     <>
       <Button 
         onClick={() => setShowAuthModal(true)}
-        className="bg-primary hover:bg-primary/90 text-white px-6 py-2"
+        className="bg-primary hover:bg-primary/90 text-white"
       >
         Reservar
       </Button>

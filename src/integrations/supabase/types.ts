@@ -9,6 +9,30 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      locations: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
       pqrs: {
         Row: {
           created_at: string
@@ -41,6 +65,38 @@ export type Database = {
           tipo?: string
         }
         Relationships: []
+      }
+      reservations: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          is_booked: boolean | null
+          location_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          is_booked?: boolean | null
+          location_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          is_booked?: boolean | null
+          location_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reservations_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "locations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

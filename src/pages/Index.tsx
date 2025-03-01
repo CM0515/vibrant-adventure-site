@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search, Star, ArrowRight, Users, Globe, Shield, Mountain, Clock, Plane } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,9 +7,9 @@ import LanguageSelector from "../components/LanguageSelector";
 import { useLanguage } from "../contexts/LanguageContext";
 import { BookButton } from "@/components/BookButton";
 import MobileMenu from "@/components/MobileMenu";
+import { TourSearch } from "@/components/TourSearch";
 
 const Index = () => {
-  const [searchDestination, setSearchDestination] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useLanguage();
 
@@ -130,23 +129,8 @@ const Index = () => {
           }} transition={{
             duration: 0.6,
             delay: 0.4
-          }} className="bg-white p-4 rounded-2xl shadow-lg flex flex-wrap md:flex-nowrap gap-4">
-              <div className="flex-1 min-w-[200px]">
-                <div className="flex items-center gap-2">
-                  <MapPin className="text-primary" size={20} />
-                  <input type="text" placeholder="¿A dónde quieres ir?" className="w-full outline-none" value={searchDestination} onChange={e => setSearchDestination(e.target.value)} />
-                </div>
-              </div>
-              <div className="flex-1 min-w-[200px] border-l border-gray-200 pl-4">
-                <div className="flex items-center gap-2">
-                  <Calendar className="text-primary" size={20} />
-                  <input type="text" placeholder="¿Cuándo?" className="w-full outline-none" />
-                </div>
-              </div>
-              <button className="btn-primary flex items-center gap-2 whitespace-nowrap">
-                <Search size={20} />
-                Buscar
-              </button>
+          }}>
+              <TourSearch />
             </motion.div>
           </div>
         </div>
