@@ -131,6 +131,7 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
         });
       } else {
         toast({
+          variant: "success",
           title: "Registro exitoso",
           description: "Por favor verifica tu correo electrónico",
         });
@@ -172,6 +173,7 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
         });
       } else {
         toast({
+          variant: "success",
           title: "¡Bienvenido de vuelta!",
           description: "Has iniciado sesión correctamente",
         });
