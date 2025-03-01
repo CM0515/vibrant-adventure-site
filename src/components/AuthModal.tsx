@@ -19,6 +19,7 @@ import {
   Eye,
   EyeOff,
   Facebook,
+  Flag,
   Info,
   Mail,
   X,
@@ -51,26 +52,26 @@ const PASSWORD_REQUIREMENTS = [
 
 // List of country codes
 const COUNTRY_CODES = [
-  { code: "+57", name: "Colombia" },
-  { code: "+1", name: "Estados Unidos" },
-  { code: "+52", name: "México" },
-  { code: "+34", name: "España" },
-  { code: "+54", name: "Argentina" },
-  { code: "+56", name: "Chile" },
-  { code: "+51", name: "Perú" },
-  { code: "+593", name: "Ecuador" },
-  { code: "+58", name: "Venezuela" },
-  { code: "+591", name: "Bolivia" },
-  { code: "+595", name: "Paraguay" },
-  { code: "+598", name: "Uruguay" },
-  { code: "+506", name: "Costa Rica" },
-  { code: "+503", name: "El Salvador" },
-  { code: "+502", name: "Guatemala" },
-  { code: "+504", name: "Honduras" },
-  { code: "+505", name: "Nicaragua" },
-  { code: "+507", name: "Panamá" },
-  { code: "+1", name: "Puerto Rico" },
-  { code: "+1", name: "República Dominicana" },
+  { code: "+57", name: "Colombia", short: "CO" },
+  { code: "+1", name: "Estados Unidos", short: "US" },
+  { code: "+52", name: "México", short: "MX" },
+  { code: "+34", name: "España", short: "ES" },
+  { code: "+54", name: "Argentina", short: "AR" },
+  { code: "+56", name: "Chile", short: "CL" },
+  { code: "+51", name: "Perú", short: "PE" },
+  { code: "+593", name: "Ecuador", short: "EC" },
+  { code: "+58", name: "Venezuela", short: "VE" },
+  { code: "+591", name: "Bolivia", short: "BO" },
+  { code: "+595", name: "Paraguay", short: "PY" },
+  { code: "+598", name: "Uruguay", short: "UY" },
+  { code: "+506", name: "Costa Rica", short: "CR" },
+  { code: "+503", name: "El Salvador", short: "SV" },
+  { code: "+502", name: "Guatemala", short: "GT" },
+  { code: "+504", name: "Honduras", short: "HN" },
+  { code: "+505", name: "Nicaragua", short: "NI" },
+  { code: "+507", name: "Panamá", short: "PA" },
+  { code: "+1", name: "Puerto Rico", short: "PR" },
+  { code: "+1", name: "República Dominicana", short: "DO" },
 ];
 
 export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
@@ -240,13 +241,23 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
                     value={countryCode}
                     onValueChange={setCountryCode}
                   >
-                    <SelectTrigger className="w-[110px]">
+                    <SelectTrigger className="w-[110px] bg-background border-input">
                       <SelectValue placeholder="Código" />
                     </SelectTrigger>
-                    <SelectContent className="max-h-60">
+                    <SelectContent className="bg-background border border-input max-h-60">
                       {COUNTRY_CODES.map((country) => (
-                        <SelectItem key={`${country.code}-${country.name}`} value={country.code}>
-                          {country.code} {country.name}
+                        <SelectItem 
+                          key={`${country.code}-${country.name}`} 
+                          value={country.code}
+                          className="flex items-center"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Flag className="h-3.5 w-3.5" aria-hidden="true" />
+                            <span>{country.code}</span>
+                            <span className="text-muted-foreground text-xs">
+                              {country.short}
+                            </span>
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
