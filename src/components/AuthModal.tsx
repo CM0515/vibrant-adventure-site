@@ -79,6 +79,8 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [countryCode, setCountryCode] = useState("+57");
+  const [loginError, setLoginError] = useState("");
+  const [registerError, setRegisterError] = useState("");
   const { toast } = useToast();
 
   // Check password requirements
@@ -89,6 +91,18 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
   const handleEmailSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setRegisterError("");
+
+    // Verify all password requirements
+    const passesAllRequirements = PASSWORD_REQUIREMENTS.every(req => 
+      checkPasswordRequirement(req)
+    );
+    
+    if (!passesAllRequirements) {
+      setRegisterError("La contraseña no cumple con todos los requisitos");
+      setIsLoading(false);
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
@@ -96,89 +110,114 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
     const fullName = formData.get("fullName") as string;
     const phoneNumber = `${countryCode}${formData.get("phoneNumber") as string}`;
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-          phone_number: phoneNumber,
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+            phone_number: phoneNumber,
+          },
         },
-      },
-    });
+      });
 
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error al registrarse",
-        description: error.message,
-      });
-    } else {
-      toast({
-        title: "Registro exitoso",
-        description: "Por favor verifica tu correo electrónico",
-      });
-      onOpenChange(false);
+      if (error) {
+        setRegisterError(error.message);
+        toast({
+          variant: "destructive",
+          title: "Error al registrarse",
+          description: error.message,
+        });
+      } else {
+        toast({
+          title: "Registro exitoso",
+          description: "Por favor verifica tu correo electrónico",
+        });
+        onOpenChange(false);
+      }
+    } catch (error) {
+      setRegisterError("Error inesperado. Inténtalo más tarde.");
+      console.error("Error en registro:", error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   const handleEmailSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setLoginError("");
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      console.log("Iniciando sesión con:", { email });
+      
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error al iniciar sesión",
-        description: error.message,
-      });
-    } else {
-      toast({
-        title: "¡Bienvenido de vuelta!",
-        description: "Has iniciado sesión correctamente",
-      });
-      onOpenChange(false);
+      console.log("Respuesta de auth:", { data, error });
+
+      if (error) {
+        setLoginError(error.message);
+        toast({
+          variant: "destructive",
+          title: "Error al iniciar sesión",
+          description: error.message,
+        });
+      } else {
+        toast({
+          title: "¡Bienvenido de vuelta!",
+          description: "Has iniciado sesión correctamente",
+        });
+        onOpenChange(false);
+      }
+    } catch (error) {
+      setLoginError("Error inesperado. Inténtalo más tarde.");
+      console.error("Error en inicio de sesión:", error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   const handleGoogleSignIn = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error al iniciar sesión con Google",
-        description: error.message,
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
       });
+
+      if (error) {
+        toast({
+          variant: "destructive",
+          title: "Error al iniciar sesión con Google",
+          description: error.message,
+        });
+      }
+    } catch (error) {
+      console.error("Error en inicio de sesión con Google:", error);
     }
   };
 
   const handleFacebookSignIn = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "facebook",
-    });
-
-    if (error) {
-      toast({
-        variant: "destructive",
-        title: "Error al iniciar sesión con Facebook",
-        description: error.message,
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "facebook",
       });
+
+      if (error) {
+        toast({
+          variant: "destructive",
+          title: "Error al iniciar sesión con Facebook",
+          description: error.message,
+        });
+      }
+    } catch (error) {
+      console.error("Error en inicio de sesión con Facebook:", error);
     }
   };
 
@@ -210,13 +249,30 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password-login">Contraseña</Label>
-                <Input
-                  id="password-login"
-                  name="password"
-                  type="password"
-                  required
-                />
+                <div className="relative">
+                  <Input
+                    id="password-login"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 flex items-center px-3"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-gray-500" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-gray-500" />
+                    )}
+                  </button>
+                </div>
               </div>
+              {loginError && (
+                <div className="text-destructive text-sm">{loginError}</div>
+              )}
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
               </Button>
@@ -338,6 +394,9 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
                   </p>
                 </div>
               </div>
+              {registerError && (
+                <div className="text-destructive text-sm">{registerError}</div>
+              )}
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Registrando..." : "Registrarse"}
               </Button>
