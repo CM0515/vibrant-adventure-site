@@ -1,4 +1,3 @@
-
 import {
   Dialog,
   DialogContent,
@@ -13,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import {
   Check,
   Eye,
@@ -37,7 +36,6 @@ interface AuthModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-// Password strength requirements
 const PASSWORD_REQUIREMENTS = [
   { id: "uppercase", label: "Al menos una mayúscula", regex: /[A-Z]/ },
   { id: "lowercase", label: "Al menos una minúscula", regex: /[a-z]/ },
@@ -50,7 +48,6 @@ const PASSWORD_REQUIREMENTS = [
   { id: "length", label: "Mínimo 8 caracteres", regex: /.{8,}/ },
 ];
 
-// List of country codes
 const COUNTRY_CODES = [
   { code: "+57", name: "Colombia", short: "CO" },
   { code: "+1", name: "Estados Unidos", short: "US" },
@@ -83,7 +80,6 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
   const [registerError, setRegisterError] = useState("");
   const { toast } = useToast();
 
-  // Check password requirements
   const checkPasswordRequirement = (requirement: { regex: RegExp }) => {
     return requirement.regex.test(password);
   };
@@ -93,7 +89,6 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
     setIsLoading(true);
     setRegisterError("");
 
-    // Verify all password requirements
     const passesAllRequirements = PASSWORD_REQUIREMENTS.every(req => 
       checkPasswordRequirement(req)
     );
@@ -139,6 +134,11 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
       }
     } catch (error) {
       setRegisterError("Error inesperado. Inténtalo más tarde.");
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error inesperado. Inténtalo más tarde.",
+      });
       console.error("Error en registro:", error);
     } finally {
       setIsLoading(false);
@@ -181,6 +181,11 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
       }
     } catch (error) {
       setLoginError("Error inesperado. Inténtalo más tarde.");
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error inesperado. Inténtalo más tarde.",
+      });
       console.error("Error en inicio de sesión:", error);
     } finally {
       setIsLoading(false);
@@ -201,6 +206,11 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
         });
       }
     } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error inesperado al iniciar sesión con Google",
+      });
       console.error("Error en inicio de sesión con Google:", error);
     }
   };
@@ -219,6 +229,11 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
         });
       }
     } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error inesperado al iniciar sesión con Facebook",
+      });
       console.error("Error en inicio de sesión con Facebook:", error);
     }
   };
