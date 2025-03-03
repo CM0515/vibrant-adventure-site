@@ -1,4 +1,3 @@
-
 import {
   Dialog,
   DialogContent,
@@ -233,7 +232,7 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "No se pudo reenviar el correo de verificación",
+        description: error.message || "No se pudo reenviar el correo de verificación",
       });
     } finally {
       setIsResendingEmail(false);

@@ -32,9 +32,9 @@ serve(async (req: Request) => {
 
     console.log(`Reenviando correo de verificación a: ${email}`);
 
-    // Get user by email to check if exists
+    // Get user by email to check if exists - Fix: correct table name
     const { data: users, error: userError } = await supabase
-      .from('auth.users')
+      .from('users')
       .select('*')
       .eq('email', email)
       .maybeSingle();
@@ -60,11 +60,10 @@ serve(async (req: Request) => {
       );
     }
 
-    // Fix: use email confirmation type instead of signup
+    // Use magiclink/otp instead of email_change since we just want to confirm existing email
     const { error } = await supabase.auth.admin.generateLink({
-      type: 'email_change',
+      type: 'magiclink',
       email,
-      newEmail: email,
       options: {
         redirectTo: `${req.headers.get("origin") || "http://localhost:3000"}`
       }
