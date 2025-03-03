@@ -172,8 +172,10 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
       if (error) {
         setLoginError(error.message);
         
-        // Verificamos si el error es de correo no confirmado
-        if (error.message.includes("Email not confirmed")) {
+        // Improved detection of unconfirmed email errors
+        if (error.message.toLowerCase().includes("email not confirmed") || 
+            error.message.toLowerCase().includes("correo no confirmado") ||
+            error.message.toLowerCase().includes("email no verificado")) {
           setEmailToVerify(email);
           setShowVerificationInfo(true);
         }
@@ -209,12 +211,15 @@ export function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
     
     setIsResendingEmail(true);
     try {
+      // Call our improved edge function
       const response = await supabase.functions.invoke("resend-verification", {
         body: { email: emailToVerify },
       });
       
+      console.log("Respuesta de resend-verification:", response);
+      
       if (response.error) {
-        throw new Error(response.error.message);
+        throw new Error(response.error);
       }
       
       toast({

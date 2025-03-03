@@ -60,10 +60,11 @@ serve(async (req: Request) => {
       );
     }
 
-    // Resend verification email
+    // Fix: use email confirmation type instead of signup
     const { error } = await supabase.auth.admin.generateLink({
-      type: 'signup',
+      type: 'email_change',
       email,
+      newEmail: email,
       options: {
         redirectTo: `${req.headers.get("origin") || "http://localhost:3000"}`
       }
