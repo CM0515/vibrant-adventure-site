@@ -8,6 +8,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { BookButton } from "@/components/BookButton";
 import MobileMenu from "@/components/MobileMenu";
 import { TourSearch } from "@/components/TourSearch";
+import PhotoGallery from "@/components/PhotoGallery";
 
 const Index = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,6 +58,17 @@ const Index = () => {
     description: "Municipio costero famoso por su Festival del Burro y sus hermosas playas. Disfruta del mejor pescado fresco, deportes acuáticos y espectaculares atardeceres caribeños.",
     image: "/lovable-uploads/2439d93f-1714-461c-b666-17b7cac194c5.png"
   }];
+
+  const galleryImages = [
+    { id: 1, src: "/lovable-uploads/f2dc979b-e5cb-4583-a0c4-68a70296638a.png", alt: "El Carito landscape" },
+    { id: 2, src: "/lovable-uploads/530f9e82-fe6a-4bb7-981c-4945d5abd9ab.png", alt: "Lorica cityscape" },
+    { id: 3, src: "/lovable-uploads/755d0928-e7cb-4b51-a819-af0713643e41.png", alt: "Tuchín artisan work" },
+    { id: 4, src: "/lovable-uploads/2439d93f-1714-461c-b666-17b7cac194c5.png", alt: "San Antero beaches" },
+    { id: 5, src: "/lovable-uploads/19ea96e8-e92d-4321-b4f8-14c7509c8dd4.jpg", alt: "Local tourism experience" },
+    { id: 6, src: "/lovable-uploads/cc5567a7-b705-423a-99ff-9f62c83ed1e8.jpg", alt: "Coastal view" },
+    { id: 7, src: "/lovable-uploads/ab018bb5-edff-41ba-98c4-1b75ea387447.png", alt: "Cultural heritage" },
+    { id: 8, src: "/lovable-uploads/c934c81b-7c90-483c-b33c-460280404c0f.png", alt: "Traditional crafts" }
+  ];
 
   return <div className="min-h-screen">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-lg" : "bg-transparent backdrop-blur-md"}`}>
@@ -335,6 +347,15 @@ const Index = () => {
             </p>
           </motion.div>
 
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="mb-16"
+          >
+            <h3 className="text-2xl font-serif font-semibold mb-6 text-center">Galería de Fotos</h3>
+            <PhotoGallery images={galleryImages} />
+          </motion.div>
           
         </div>
       </section>
