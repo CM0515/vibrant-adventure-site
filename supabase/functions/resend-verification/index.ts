@@ -32,11 +32,11 @@ serve(async (req: Request) => {
 
     console.log(`Reenviando correo de verificación a: ${email}`);
 
-    // Get user by email to check if exists - Fix: correct table name
-    const { data: users, error: userError } = await supabase
-      .from('users')
+    // Get user by email to check if exists - using profiles table instead
+    const { data: userProfiles, error: userError } = await supabase
+      .from('profiles')
       .select('*')
-      .eq('email', email)
+      .eq('id', (await supabase.auth.admin.listUsers({ search: email })).data.users[0]?.id)
       .maybeSingle();
 
     if (userError) {
@@ -50,7 +50,13 @@ serve(async (req: Request) => {
       );
     }
 
-    if (!users) {
+    // Alternative approach: directly check auth.users through admin API
+    const { data: authData, error: authError } = await supabase.auth.admin.listUsers({
+      search: email
+    });
+
+    if (authError || !authData.users.length) {
+      console.error("Error al buscar usuario en auth:", authError || "Usuario no encontrado");
       return new Response(
         JSON.stringify({ error: "Usuario no encontrado" }),
         {
@@ -60,7 +66,7 @@ serve(async (req: Request) => {
       );
     }
 
-    // Use magiclink/otp instead of email_change since we just want to confirm existing email
+    // Use magiclink/otp for email verification
     const { error } = await supabase.auth.admin.generateLink({
       type: 'magiclink',
       email,
