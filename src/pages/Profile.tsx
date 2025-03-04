@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Camera, Loader2 } from "lucide-react";
+import { Camera, Loader2, UserCircle } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -15,10 +14,11 @@ type ProfileData = {
   id: string;
   full_name: string | null;
   phone_number: string | null;
-  address?: string | null;
-  birthdate?: string | null;
-  interests?: string | null;
-  profile_image_url?: string | null;
+  address: string | null;
+  birthdate: string | null;
+  interests: string | null;
+  profile_image_url: string | null;
+  created_at: string;
 }
 
 export default function Profile() {
@@ -65,7 +65,7 @@ export default function Profile() {
 
         if (error) throw error;
         
-        setProfileData(data);
+        setProfileData(data as ProfileData);
         setFullName(data.full_name || "");
         setPhoneNumber(data.phone_number || "");
         setAddress(data.address || "");
