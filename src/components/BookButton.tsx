@@ -4,7 +4,15 @@ import { Button } from "@/components/ui/button";
 import { AuthModal } from "./AuthModal";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
-import { UserCircle } from "lucide-react";
+import { ChevronDown, LogOut, Settings, UserCircle } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 export function BookButton() {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -51,17 +59,46 @@ export function BookButton() {
     }
   };
   
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast.success("Sesión cerrada exitosamente");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      toast.error("Error al cerrar sesión");
+    }
+  };
+  
   return (
     <>
       {!loading && (
         user ? (
-          <Button 
-            onClick={handleReservationClick}
-            className="bg-accent hover:bg-accent/90 text-white"
-          >
-            <UserCircle className="mr-1" />
-            Reservar ahora
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                className="bg-accent hover:bg-accent/90 text-white"
+              >
+                <UserCircle className="mr-1" />
+                {user.email?.split('@')[0]}
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 bg-white">
+              <DropdownMenuItem onClick={handleReservationClick}>
+                Reservar ahora
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Configuración</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Cerrar sesión</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
           <Button 
             onClick={handleReservationClick}
