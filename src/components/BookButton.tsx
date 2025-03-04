@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { AuthModal } from "./AuthModal";
@@ -13,11 +12,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export function BookButton() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   
   useEffect(() => {
     // Get the current user session on component mount
@@ -68,6 +69,10 @@ export function BookButton() {
       toast.error("Error al cerrar sesión");
     }
   };
+
+  const handleProfileClick = () => {
+    navigate('/profile');
+  };
   
   return (
     <>
@@ -88,6 +93,10 @@ export function BookButton() {
                 Reservar ahora
               </DropdownMenuItem>
               <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleProfileClick}>
+                <UserCircle className="mr-2 h-4 w-4" />
+                <span>Perfil</span>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Configuración</span>

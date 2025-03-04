@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import Tours from "./pages/Tours";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import PQRS from "./pages/PQRS";
 
@@ -25,7 +26,8 @@ const TitleManager = () => {
       '/tours': t('page.tours'),
       '/about': t('page.about'),
       '/contact': t('page.contact'),
-      '/pqrs': 'PQRS'
+      '/pqrs': 'PQRS',
+      '/profile': 'Perfil'
     };
 
     document.title = titles[location.pathname] || t('page.home');
@@ -43,6 +45,7 @@ const AppRoutes = () => (
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/pqrs" element={<PQRS />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </BrowserRouter>
