@@ -174,111 +174,113 @@ export default function Profile() {
   }
 
   return (
-    <div className="container max-w-3xl py-8">
-      <div className="bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-2xl font-bold mb-6">Perfil de Usuario</h1>
+    <div className="bg-gradient-to-b from-orange-50 to-amber-100 min-h-screen py-10">
+      <div className="container max-w-3xl">
+        <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-xl p-6">
+          <h1 className="text-2xl font-bold mb-6 text-secondary">Perfil de Usuario</h1>
 
-        <div className="flex flex-col sm:flex-row gap-6 mb-6">
-          <div className="flex flex-col items-center">
-            <div className="relative h-32 w-32 rounded-full overflow-hidden bg-gray-100 mb-2 border">
-              {profileImage ? (
-                <img 
-                  src={profileImage} 
-                  alt="Profile" 
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full w-full">
-                  <UserCircle className="h-20 w-20 text-gray-400" />
-                </div>
-              )}
+          <div className="flex flex-col sm:flex-row gap-6 mb-6">
+            <div className="flex flex-col items-center">
+              <div className="relative h-32 w-32 rounded-full overflow-hidden bg-gray-100 mb-2 border shadow-md">
+                {profileImage ? (
+                  <img 
+                    src={profileImage} 
+                    alt="Profile" 
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full w-full">
+                    <UserCircle className="h-20 w-20 text-gray-400" />
+                  </div>
+                )}
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setImageUploadOpen(true)}
+                className="mb-4"
+              >
+                <Camera className="h-4 w-4 mr-1" />
+                Cambiar foto
+              </Button>
             </div>
+
+            <div className="flex-1 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName">Nombre completo</Label>
+                  <Input
+                    id="fullName"
+                    placeholder="Ej. Juan Pérez"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phoneNumber">Teléfono</Label>
+                  <Input
+                    id="phoneNumber"
+                    placeholder="Ej. +57 300 1234567"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email">Correo electrónico</Label>
+                <Input
+                  id="email"
+                  value={user?.email || ""}
+                  disabled
+                  className="bg-gray-50"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="address">Dirección</Label>
+                <Input
+                  id="address"
+                  placeholder="Ej. Calle 123 #45-67, Ciudad"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="birthdate">Fecha de nacimiento</Label>
+                  <Input
+                    id="birthdate"
+                    type="date"
+                    value={birthdate}
+                    onChange={(e) => setBirthdate(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="interests">Intereses</Label>
+                <Input
+                  id="interests"
+                  placeholder="Ej. Senderismo, Fotografía, Naturaleza"
+                  value={interests}
+                  onChange={(e) => setInterests(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end">
             <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setImageUploadOpen(true)}
-              className="mb-4"
+              onClick={handleSaveProfile}
+              disabled={isSaving}
+              className="bg-primary hover:bg-primary/90 text-white"
             >
-              <Camera className="h-4 w-4 mr-1" />
-              Cambiar foto
+              {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Guardar cambios
             </Button>
           </div>
-
-          <div className="flex-1 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="fullName">Nombre completo</Label>
-                <Input
-                  id="fullName"
-                  placeholder="Ej. Juan Pérez"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phoneNumber">Teléfono</Label>
-                <Input
-                  id="phoneNumber"
-                  placeholder="Ej. +57 300 1234567"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">Correo electrónico</Label>
-              <Input
-                id="email"
-                value={user?.email || ""}
-                disabled
-                className="bg-gray-50"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="address">Dirección</Label>
-              <Input
-                id="address"
-                placeholder="Ej. Calle 123 #45-67, Ciudad"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="birthdate">Fecha de nacimiento</Label>
-                <Input
-                  id="birthdate"
-                  type="date"
-                  value={birthdate}
-                  onChange={(e) => setBirthdate(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="interests">Intereses</Label>
-              <Input
-                id="interests"
-                placeholder="Ej. Senderismo, Fotografía, Naturaleza"
-                value={interests}
-                onChange={(e) => setInterests(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-end">
-          <Button
-            onClick={handleSaveProfile}
-            disabled={isSaving}
-            className="bg-primary hover:bg-primary/90 text-white"
-          >
-            {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Guardar cambios
-          </Button>
         </div>
       </div>
 
