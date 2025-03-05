@@ -7,6 +7,12 @@ import LanguageSelector from "../components/LanguageSelector";
 import { useLanguage } from "../contexts/LanguageContext";
 import { TourBookingButton } from "@/components/TourBookingButton";
 
+type ItineraryItem = {
+  hora: string;
+  actividad: string;
+  lugar?: string;
+};
+
 const Tours = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useLanguage();
@@ -21,7 +27,7 @@ const Tours = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const itinerarioNaturaleza = [
+  const itinerarioNaturaleza: ItineraryItem[] = [
     { hora: "06:45 am", actividad: "Bienvenida e indicaciones (Puerto de embarque Centro Histórico de Lorica)" },
     { hora: "07:00 am", actividad: "Recorrido náutico biocultural por el río Sinú Lorica-Cotocá Arriba" },
     { hora: "08:00 am", actividad: "Recepción en Centro ecoturístico 'Econbiba' y desayuno campesino" },
@@ -46,7 +52,7 @@ const Tours = () => {
     { servicio: "Seguro médico", detalle: "Seguro de asistencia médica" }
   ];
 
-  const itinerarioDia1 = [
+  const itinerarioDia1: ItineraryItem[] = [
     { hora: "8:00 - 8:30 am", actividad: "Bienvenida en el aeropuerto y entrega de un delantal de cocina vueltioo marcado." },
     { hora: "8:30 - 9:30 am", actividad: "Traslado aeropuerto de Montería a Santa Cruz de Lorica" },
     { hora: "9:30 -10:30 am", actividad: "Recibimiento con muestra folklórica y desayuno tradicional en el mercado público" },
@@ -59,7 +65,7 @@ const Tours = () => {
     { hora: "8:00 - 9:00 pm", actividad: "Coctel y tertulia 'Viaje en la memoria histórica del Sinú'" }
   ];
 
-  const itinerarioMonteria = [
+  const itinerarioMonteria: ItineraryItem[] = [
     { hora: "7:00 am", actividad: "Inicio de actividad (Transporte terrestre Montería-Hacienda la Quinta)", lugar: "Montería" },
     { hora: "8:00 am", actividad: "Experiencia sostenible de ganadería personalizada (Incluye cabalgata, desayuno, almuerzo y refrigerio)", lugar: "La Quinta" },
     { hora: "2:00 pm", actividad: "Traslado La Quinta – Ronda del Sinú, Montería", lugar: "Montería" },
