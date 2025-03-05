@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import LanguageSelector from "../components/LanguageSelector";
 import { useLanguage } from "../contexts/LanguageContext";
+import { TourBookingButton } from "@/components/TourBookingButton";
 
 const Tours = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -84,6 +85,43 @@ const Tours = () => {
     { servicio: "Seguro de turismo", detalle: "Seguro de asistencia médica" }
   ];
 
+  const tours = [
+    {
+      id: "tour-1",
+      name: "Detalles del Tour",
+      location: "Córdoba - \"El otro caribe, el caribe de los sentidos\"",
+      duration: "2 Noches, 3 Días",
+      price: 1670000,
+      priceInfo: "Por persona (Grupo 5 personas)",
+      description: null,
+      itinerary: itinerarioDia1,
+      services: null,
+      recommendations: "Usar ropa liviana y cómoda, gorra o sombreros de sol, protector solar, zapatos cómodos, buena disposición."
+    },
+    {
+      id: "tour-2",
+      name: "Naturaleza y Patrimonio",
+      location: "Santa Cruz de Lorica - Río Sinú",
+      duration: "1 Día completo",
+      price: 365000,
+      priceInfo: "Por persona (Grupo 6 personas)",
+      description: "Santa Cruz de Lorica – Río Sinú: El pueblo patrimonio con huellas Sirio-Libanesas en el Golfo de Morrosquillo es el escenario perfecto para vivir una experiencia turística inolvidable. Navegar por el majestuoso río Sinú y adentrarse en la Ciénaga de Bañó para observar y disfrutar de la variedad de aves, participar del programa 'Tortugas del Sinú' para conservar la hermosa Tortuga de Rio, endémica de Colombia en compañía de comunidades ribereñas de pescadores, llegar a descubrir la arquitectura y riqueza artesanal de Lorica acompañado de muestras folklóricas, una gastronomía rica y con sabor caribe entre chichas y bocachicos, es una experiencia que pondrá a prueba todos tus sentidos.",
+      itinerary: itinerarioNaturaleza,
+      services: serviciosIncluidos
+    },
+    {
+      id: "tour-3",
+      name: "TRADICIÓN GANADERA, CULTURA Y NATURALEZA EN \"LA PERLA DEL SINÚ\"",
+      location: "Montería - \"Donde la tradición ganadera y la naturaleza elevan tus sentidos\"",
+      duration: "2 Días, 1 Noche",
+      price: 1280000,
+      priceInfo: "Por persona (Grupo 6 personas)",
+      description: "Situada en el corazón del departamento de Córdoba, pasando por ella el majestuoso río Sinú, Montería es una ciudad vibrante y llena de encanto. Conocida como la Perla del Sinú, ofrece una mezcla única de naturaleza, cultura, gastronomía y modernidad que la convierte en un destino imperdible.",
+      itinerary: itinerarioMonteria,
+      services: serviciosMonteria
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF3E8] via-white to-[#FFE4CC]">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
@@ -130,201 +168,91 @@ const Tours = () => {
           </motion.div>
 
           <div className="space-y-8">
-            {/* Tour 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 hover:shadow-2xl transition-shadow duration-300"
-            >
-              <div className="flex flex-col md:flex-row justify-between gap-6 mb-6 border-b border-gray-100 pb-6">
-                <div>
-                  <h2 className="text-2xl font-serif font-semibold mb-2">Detalles del Tour</h2>
-                  <div className="flex items-center gap-2 text-primary mb-2">
-                    <Clock className="w-5 h-5" />
-                    <span>2 Noches, 3 Días</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-primary">
-                    <MapPin className="w-5 h-5" />
-                    <span>Córdoba - "El otro caribe, el caribe de los sentidos"</span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-primary mb-1">
-                    $1.670.000
-                  </div>
-                  <div className="text-secondary-light">Por persona (Grupo 5 personas)</div>
-                  <button className="mt-4 btn-primary">
-                    Reservar Ahora
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-8">
-                <div className="bg-primary-light/30 rounded-xl p-6">
-                  <h3 className="text-xl font-serif font-semibold mb-3">Recomendaciones</h3>
-                  <p className="text-secondary-light">
-                    Usar ropa liviana y cómoda, gorra o sombreros de sol, protector solar, 
-                    zapatos cómodos, buena disposición.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-serif font-semibold mb-4">Día 1</h3>
-                  <div className="space-y-4">
-                    {itinerarioDia1.map((item, index) => (
-                      <div 
-                        key={index} 
-                        className="flex gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                      >
-                        <div className="w-32 font-medium text-primary">{item.hora}</div>
-                        <div className="flex-1">{item.actividad}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Tour 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 hover:shadow-2xl transition-shadow duration-300"
-            >
-              <div className="flex flex-col md:flex-row justify-between gap-6 mb-6 border-b border-gray-100 pb-6">
-                <div>
-                  <h2 className="text-2xl font-serif font-semibold mb-2">Naturaleza y Patrimonio</h2>
-                  <div className="flex items-center gap-2 text-primary mb-2">
-                    <Clock className="w-5 h-5" />
-                    <span>1 Día completo</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-primary">
-                    <MapPin className="w-5 h-5" />
-                    <span>Santa Cruz de Lorica - Río Sinú</span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-primary mb-1">
-                    $365.000
-                  </div>
-                  <div className="text-secondary-light">Por persona (Grupo 6 personas)</div>
-                  <button className="mt-4 btn-primary">
-                    Reservar Ahora
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-8">
-                <div className="bg-primary-light/30 rounded-xl p-6">
-                  <h3 className="text-xl font-serif font-semibold mb-3">Incluye</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {serviciosIncluidos.map((item, index) => (
-                      <div key={index} className="flex flex-col">
-                        <span className="font-medium">{item.servicio}</span>
-                        {item.detalle && <span className="text-sm text-secondary-light">{item.detalle}</span>}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-xl font-serif font-semibold mb-4">Itinerario</h3>
-                  {itinerarioNaturaleza.map((item, index) => (
-                    <div 
-                      key={index} 
-                      className="flex gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                    >
-                      <div className="w-32 font-medium text-primary">{item.hora}</div>
-                      <div className="flex-1">{item.actividad}</div>
+            {tours.map((tour, index) => (
+              <motion.div
+                key={tour.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 * index }}
+                className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 hover:shadow-2xl transition-shadow duration-300"
+              >
+                <div className="flex flex-col md:flex-row justify-between gap-6 mb-6 border-b border-gray-100 pb-6">
+                  <div>
+                    <h2 className="text-2xl font-serif font-semibold mb-2">{tour.name}</h2>
+                    <div className="flex items-center gap-2 text-primary mb-2">
+                      <Clock className="w-5 h-5" />
+                      <span>{tour.duration}</span>
                     </div>
-                  ))}
-                </div>
-
-                <div className="bg-secondary/5 rounded-xl p-6">
-                  <p className="text-secondary-light">
-                    Santa Cruz de Lorica – Río Sinú: El pueblo patrimonio con huellas Sirio-Libanesas en el Golfo de 
-                    Morrosquillo es el escenario perfecto para vivir una experiencia turística inolvidable. Navegar por el 
-                    majestuoso río Sinú y adentrarse en la Ciénaga de Bañó para observar y disfrutar de la variedad de aves, 
-                    participar del programa 'Tortugas del Sinú' para conservar la hermosa Tortuga de Rio, endémica de 
-                    Colombia en compañía de comunidades ribereñas de pescadores, llegar a descubrir la arquitectura y 
-                    riqueza artesanal de Lorica acompañado de muestras folklóricas, una gastronomía rica y con sabor caribe 
-                    entre chichas y bocachicos, es una experiencia que pondrá a prueba todos tus sentidos.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Tour 3 - Montería */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 hover:shadow-2xl transition-shadow duration-300"
-            >
-              <div className="flex flex-col md:flex-row justify-between gap-6 mb-6 border-b border-gray-100 pb-6">
-                <div>
-                  <h2 className="text-2xl font-serif font-semibold mb-2">TRADICIÓN GANADERA, CULTURA Y NATURALEZA EN "LA PERLA DEL SINÚ"</h2>
-                  <div className="flex items-center gap-2 text-primary mb-2">
-                    <Clock className="w-5 h-5" />
-                    <span>2 Días, 1 Noche</span>
+                    <div className="flex items-center gap-2 text-primary">
+                      <MapPin className="w-5 h-5" />
+                      <span>{tour.location}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-primary">
-                    <MapPin className="w-5 h-5" />
-                    <span>Montería - "Donde la tradición ganadera y la naturaleza elevan tus sentidos"</span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-primary mb-1">
-                    $1.280.000
-                  </div>
-                  <div className="text-secondary-light">Por persona (Grupo 6 personas)</div>
-                  <button className="mt-4 btn-primary">
-                    Reservar Ahora
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-8">
-                <div className="bg-primary-light/30 rounded-xl p-6">
-                  <h3 className="text-xl font-serif font-semibold mb-3">Descripción</h3>
-                  <p className="text-secondary-light">
-                    Situada en el corazón del departamento de Córdoba, pasando por ella el majestuoso río Sinú, Montería es 
-                    una ciudad vibrante y llena de encanto. Conocida como la Perla del Sinú, ofrece una mezcla única de 
-                    naturaleza, cultura, gastronomía y modernidad que la convierte en un destino imperdible.
-                  </p>
-                </div>
-
-                <div className="bg-primary-light/30 rounded-xl p-6">
-                  <h3 className="text-xl font-serif font-semibold mb-3">Incluye</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {serviciosMonteria.map((item, index) => (
-                      <div key={index} className="flex flex-col">
-                        <span className="font-medium">{item.servicio}</span>
-                        {item.detalle && <span className="text-sm text-secondary-light">{item.detalle}</span>}
-                      </div>
-                    ))}
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-primary mb-1">
+                      ${tour.price.toLocaleString()}
+                    </div>
+                    <div className="text-secondary-light">{tour.priceInfo}</div>
+                    <TourBookingButton 
+                      tourData={tour} 
+                      className="mt-4 btn-primary"
+                    />
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-xl font-serif font-semibold mb-4">Itinerario</h3>
-                  {itinerarioMonteria.map((item, index) => (
-                    <div 
-                      key={index} 
-                      className="flex gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                    >
-                      <div className="w-32 font-medium text-primary">{item.hora}</div>
-                      <div className="flex-1">
-                        <div>{item.actividad}</div>
-                        <div className="text-sm text-secondary-light">{item.lugar}</div>
+                <div className="space-y-8">
+                  {tour.recommendations && (
+                    <div className="bg-primary-light/30 rounded-xl p-6">
+                      <h3 className="text-xl font-serif font-semibold mb-3">Recomendaciones</h3>
+                      <p className="text-secondary-light">
+                        {tour.recommendations}
+                      </p>
+                    </div>
+                  )}
+
+                  {tour.description && (
+                    <div className="bg-primary-light/30 rounded-xl p-6">
+                      <h3 className="text-xl font-serif font-semibold mb-3">Descripción</h3>
+                      <p className="text-secondary-light">
+                        {tour.description}
+                      </p>
+                    </div>
+                  )}
+
+                  {tour.services && (
+                    <div className="bg-primary-light/30 rounded-xl p-6">
+                      <h3 className="text-xl font-serif font-semibold mb-3">Incluye</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {tour.services.map((item, index) => (
+                          <div key={index} className="flex flex-col">
+                            <span className="font-medium">{item.servicio}</span>
+                            {item.detalle && <span className="text-sm text-secondary-light">{item.detalle}</span>}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
+                  )}
+
+                  {tour.itinerary && (
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-serif font-semibold mb-4">Itinerario</h3>
+                      {tour.itinerary.map((item, index) => (
+                        <div 
+                          key={index} 
+                          className="flex gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                        >
+                          <div className="w-32 font-medium text-primary">{item.hora}</div>
+                          <div className="flex-1">
+                            <div>{item.actividad}</div>
+                            {item.lugar && <div className="text-sm text-secondary-light">{item.lugar}</div>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

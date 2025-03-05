@@ -9,6 +9,66 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          adults: number
+          children: number
+          children_ages: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at: string
+          end_date: string
+          id: string
+          payment_reference: string | null
+          payment_status: string
+          special_requests: string | null
+          start_date: string
+          total_price: number
+          tour_id: string
+          tour_name: string
+          user_id: string | null
+        }
+        Insert: {
+          adults: number
+          children?: number
+          children_ages?: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at?: string
+          end_date: string
+          id?: string
+          payment_reference?: string | null
+          payment_status?: string
+          special_requests?: string | null
+          start_date: string
+          total_price: number
+          tour_id: string
+          tour_name: string
+          user_id?: string | null
+        }
+        Update: {
+          adults?: number
+          children?: number
+          children_ages?: string | null
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          created_at?: string
+          end_date?: string
+          id?: string
+          payment_reference?: string | null
+          payment_status?: string
+          special_requests?: string | null
+          start_date?: string
+          total_price?: number
+          tour_id?: string
+          tour_name?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       locations: {
         Row: {
           created_at: string
