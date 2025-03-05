@@ -129,7 +129,7 @@ export default function Profile() {
 
     const fileExt = file.name.split('.').pop();
     const fileName = `${user.id}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `profile-images/${fileName}`;
+    const filePath = `${fileName}`;
 
     setIsUploading(true);
     try {
