@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -6,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Camera, Loader2, UserCircle } from "lucide-react";
+import { Camera, Loader2, UserCircle, ChevronLeft } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -176,6 +177,15 @@ export default function Profile() {
   return (
     <div className="bg-gradient-to-b from-orange-50 to-amber-100 min-h-screen py-10">
       <div className="container max-w-3xl">
+        <Button 
+          variant="ghost" 
+          className="mb-4" 
+          onClick={() => navigate(-1)}
+        >
+          <ChevronLeft className="h-4 w-4 mr-1" />
+          Volver
+        </Button>
+        
         <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-xl p-6">
           <h1 className="text-2xl font-bold mb-6 text-secondary">Perfil de Usuario</h1>
 
