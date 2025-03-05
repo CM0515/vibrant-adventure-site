@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
+import { DateRange, Range } from "react-date-range";
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon, CheckCircle, CreditCard, Download, Loader2, Mail, Users } from "lucide-react";
+import { CalendarIcon, CheckCircle, CreditCard, Download, Loader2, Users } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -32,10 +33,13 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
   const { t } = useLanguage();
   const [step, setStep] = useState<FormStep>('details');
   const [loading, setLoading] = useState(false);
-  const [dates, setDates] = useState<{from: Date | undefined, to: Date | undefined}>({
-    from: undefined,
-    to: undefined,
-  });
+  const [dateRange, setDateRange] = useState<Range[]>([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const [formData, setFormData] = useState({
     adults: 1,
     children: 0,
@@ -84,6 +88,15 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     
     if (isOpen) {
       getUserData();
+      
+      // Reset date range when modal opens
+      setDateRange([
+        {
+          startDate: new Date(),
+          endDate: new Date(),
+          key: 'selection'
+        }
+      ]);
     }
   }, [isOpen, navigate, onOpenChange]);
 
@@ -96,6 +109,10 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleDateChange = (item: any) => {
+    setDateRange([item.selection]);
+  };
+
   const calculateTotalPrice = () => {
     const adultPrice = tourData.price * formData.adults;
     const childrenPrice = tourData.price * 0.7 * formData.children;
@@ -103,7 +120,7 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
   };
 
   const handleDetailsSubmit = async () => {
-    if (!dates.from || !dates.to || !formData.contactName || !formData.contactEmail || !formData.contactPhone) {
+    if (!dateRange[0].startDate || !formData.contactName || !formData.contactEmail || !formData.contactPhone) {
       toast.error("Por favor completa todos los campos obligatorios");
       return;
     }
@@ -115,8 +132,8 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
         user_id: user.id,
         tour_id: tourData.id,
         tour_name: tourData.name,
-        start_date: format(dates.from, 'yyyy-MM-dd'),
-        end_date: dates.to ? format(dates.to, 'yyyy-MM-dd') : format(dates.from, 'yyyy-MM-dd'),
+        start_date: format(dateRange[0].startDate, 'yyyy-MM-dd'),
+        end_date: dateRange[0].endDate ? format(dateRange[0].endDate, 'yyyy-MM-dd') : format(dateRange[0].startDate, 'yyyy-MM-dd'),
         adults: formData.adults,
         children: formData.children,
         children_ages: formData.childrenAges,
@@ -206,40 +223,19 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
           <div className="space-y-4 py-2">
             <div className="space-y-2">
               <Label htmlFor="dates">Fechas del Tour</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    id="dates"
-                    variant="outline"
-                    className="w-full justify-start text-left"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {dates.from ? (
-                      dates.to ? (
-                        <>
-                          {format(dates.from, "dd/MM/yyyy")} -{" "}
-                          {format(dates.to, "dd/MM/yyyy")}
-                        </>
-                      ) : (
-                        format(dates.from, "dd/MM/yyyy")
-                      )
-                    ) : (
-                      <span>Selecciona las fechas</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    initialFocus
-                    mode="range"
-                    defaultMonth={dates.from}
-                    selected={{ from: dates.from, to: dates.to }}
-                    onSelect={(range) => setDates({ from: range?.from, to: range?.to })}
-                    numberOfMonths={2}
-                    disabled={{ before: new Date() }}
-                  />
-                </PopoverContent>
-              </Popover>
+              <div className="border rounded-md p-4 bg-white">
+                <DateRange
+                  editableDateInputs={true}
+                  onChange={handleDateChange}
+                  moveRangeOnFirstSelection={false}
+                  ranges={dateRange}
+                  months={1}
+                  direction="vertical"
+                  className="w-full"
+                  rangeColors={["#E97B00"]}
+                  minDate={new Date()}
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -387,8 +383,9 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
                 
                 <div>Fechas:</div>
                 <div className="font-medium">
-                  {dates.from && format(dates.from, "dd/MM/yyyy")}
-                  {dates.to && dates.from !== dates.to && ` - ${format(dates.to, "dd/MM/yyyy")}`}
+                  {dateRange[0].startDate && format(dateRange[0].startDate, "dd/MM/yyyy")}
+                  {dateRange[0].endDate && dateRange[0].startDate !== dateRange[0].endDate && 
+                    ` - ${format(dateRange[0].endDate, "dd/MM/yyyy")}`}
                 </div>
                 
                 <div>Personas:</div>
@@ -459,8 +456,9 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
                 
                 <div>Fechas:</div>
                 <div className="font-medium">
-                  {dates.from && format(dates.from, "dd/MM/yyyy")}
-                  {dates.to && dates.from !== dates.to && ` - ${format(dates.to, "dd/MM/yyyy")}`}
+                  {dateRange[0].startDate && format(dateRange[0].startDate, "dd/MM/yyyy")}
+                  {dateRange[0].endDate && dateRange[0].startDate !== dateRange[0].endDate && 
+                    ` - ${format(dateRange[0].endDate, "dd/MM/yyyy")}`}
                 </div>
                 
                 <div>Personas:</div>

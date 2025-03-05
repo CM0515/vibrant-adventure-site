@@ -1,11 +1,14 @@
+
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search } from "lucide-react";
 import { format } from "date-fns";
+import { DateRange, Range } from "react-date-range";
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,7 +29,13 @@ export function TourSearch() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [availableDates, setAvailableDates] = useState<Date[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [dateRange, setDateRange] = useState<Range[]>([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const [isLoadingDates, setIsLoadingDates] = useState(false);
   const navigate = useNavigate();
 
@@ -64,7 +73,13 @@ export function TourSearch() {
         
         const availableDates = (data || []).map((item: AvailableDate) => new Date(item.date));
         setAvailableDates(availableDates);
-        setSelectedDate(undefined);
+        setDateRange([
+          {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection'
+          }
+        ]);
       } catch (error) {
         console.error("Error fetching available dates:", error);
         toast.error("No se pudieron cargar las fechas disponibles");
@@ -77,20 +92,35 @@ export function TourSearch() {
   }, [selectedLocation]);
 
   const handleSearch = () => {
-    if (!selectedLocation || !selectedDate) {
+    if (!selectedLocation || !dateRange[0].startDate) {
       toast.error("Por favor selecciona una ubicación y una fecha");
       return;
     }
 
-    navigate(`/tours?location=${selectedLocation}&date=${format(selectedDate, "yyyy-MM-dd")}`);
+    navigate(`/tours?location=${selectedLocation}&date=${format(dateRange[0].startDate, "yyyy-MM-dd")}`);
   };
 
-  const isDateAvailable = (date: Date) => {
-    return availableDates.some(availableDate => 
-      availableDate.getFullYear() === date.getFullYear() &&
-      availableDate.getMonth() === date.getMonth() &&
-      availableDate.getDate() === date.getDate()
-    );
+  const isDateDisabled = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Disable dates before today
+    if (date < today) return true;
+    
+    // If we have available dates, only enable those
+    if (availableDates.length > 0) {
+      return !availableDates.some(availableDate => 
+        availableDate.getFullYear() === date.getFullYear() &&
+        availableDate.getMonth() === date.getMonth() &&
+        availableDate.getDate() === date.getDate()
+      );
+    }
+    
+    return false;
+  };
+  
+  const handleDateChange = (ranges: any) => {
+    setDateRange([ranges.selection]);
   };
 
   return (
@@ -125,29 +155,32 @@ export function TourSearch() {
                 variant="outline"
                 className={cn(
                   "w-full justify-start text-left font-normal border-0 ring-0 shadow-none focus:ring-0 focus-visible:ring-0 px-0 bg-white",
-                  !selectedDate && "text-muted-foreground"
+                  !dateRange[0].startDate && "text-muted-foreground"
                 )}
                 disabled={!selectedLocation || isLoadingDates}
               >
-                {selectedDate ? (
-                  format(selectedDate, "PPP")
+                {dateRange[0].startDate ? (
+                  dateRange[0].endDate && dateRange[0].startDate.getTime() !== dateRange[0].endDate.getTime() ? (
+                    `${format(dateRange[0].startDate, "dd/MM/yyyy")} - ${format(dateRange[0].endDate, "dd/MM/yyyy")}`
+                  ) : (
+                    format(dateRange[0].startDate, "dd/MM/yyyy")
+                  )
                 ) : (
                   <span>{isLoadingDates ? "Cargando fechas..." : "¿Cuándo?"}</span>
                 )}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <CalendarComponent
-                mode="single"
-                selected={selectedDate}
-                onSelect={setSelectedDate}
-                disabled={(date) => {
-                  const today = new Date();
-                  today.setHours(0, 0, 0, 0);
-                  
-                  return date < today || !isDateAvailable(date);
-                }}
-                initialFocus
+            <PopoverContent className="w-auto p-0 bg-white" align="start">
+              <DateRange
+                ranges={dateRange}
+                onChange={handleDateChange}
+                moveRangeOnFirstSelection={false}
+                minDate={new Date()}
+                disabledDay={isDateDisabled}
+                showDateDisplay={false}
+                rangeColors={["#E97B00"]}
+                monthDisplayFormat="MMMM yyyy"
+                className="bg-white"
               />
             </PopoverContent>
           </Popover>
@@ -157,7 +190,7 @@ export function TourSearch() {
       <Button
         onClick={handleSearch}
         className="bg-primary hover:bg-primary/90 text-white whitespace-nowrap"
-        disabled={!selectedLocation || !selectedDate}
+        disabled={!selectedLocation || !dateRange[0].startDate}
       >
         <Search size={20} className="mr-2" />
         Buscar
