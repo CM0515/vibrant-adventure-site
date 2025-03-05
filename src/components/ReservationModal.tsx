@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
@@ -51,14 +50,12 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
   const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
 
-  // Get user data on component mount
   useEffect(() => {
     const getUserData = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
         setUser(session.user);
         
-        // Get profile data to pre-fill the form
         const { data: profileData } = await supabase
           .from('profiles')
           .select('full_name, phone_number')
@@ -73,14 +70,12 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
             contactEmail: session.user.email || ''
           }));
         } else {
-          // If no profile exists, at least set the email
           setFormData(prev => ({
             ...prev,
             contactEmail: session.user.email || ''
           }));
         }
       } else {
-        // If not logged in, redirect to login
         toast.error("Debes iniciar sesión para realizar una reserva");
         onOpenChange(false);
         navigate('/profile');
@@ -92,27 +87,22 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     }
   }, [isOpen, navigate, onOpenChange]);
 
-  // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Handle select changes
   const handleSelectChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Calculate total price
   const calculateTotalPrice = () => {
     const adultPrice = tourData.price * formData.adults;
-    const childrenPrice = tourData.price * 0.7 * formData.children; // 30% discount for children
+    const childrenPrice = tourData.price * 0.7 * formData.children;
     return adultPrice + childrenPrice;
   };
 
-  // Submit booking details
   const handleDetailsSubmit = async () => {
-    // Validate form
     if (!dates.from || !dates.to || !formData.contactName || !formData.contactEmail || !formData.contactPhone) {
       toast.error("Por favor completa todos los campos obligatorios");
       return;
@@ -121,7 +111,6 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     setLoading(true);
     
     try {
-      // Create booking in Supabase
       const { data, error } = await supabase.from('bookings').insert({
         user_id: user.id,
         tour_id: tourData.id,
@@ -143,7 +132,6 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
       
       if (data && data[0]) {
         setBookingId(data[0].id);
-        // Move to payment step
         setStep('payment');
       }
     } catch (error: any) {
@@ -154,20 +142,13 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     }
   };
 
-  // Handle payment
   const handlePayment = async () => {
     setLoading(true);
     try {
-      // Simulate ePayco payment process
-      // In a real scenario, you would redirect to ePayco or open their payment widget
-      
-      // For demo purposes, we'll just update the payment status after a timeout
       setTimeout(async () => {
-        // Generate a fake payment reference
         const fakeReference = `EP-${Math.floor(Math.random() * 1000000)}`;
         setPaymentReference(fakeReference);
         
-        // Update booking with payment info
         if (bookingId) {
           const { error } = await supabase
             .from('bookings')
@@ -180,11 +161,9 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
           if (error) throw error;
         }
         
-        // Move to confirmation step
         setStep('confirmation');
         setLoading(false);
         
-        // Generate PDF and send email
         await handleGeneratePDFAndEmail();
       }, 2000);
     } catch (error: any) {
@@ -194,10 +173,8 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     }
   };
 
-  // Generate PDF and send email
   const handleGeneratePDFAndEmail = async () => {
     try {
-      // In a real scenario, you would call an Edge Function to generate PDF and send email
       toast.success("Reserva confirmada. Se ha enviado un correo con los detalles.");
     } catch (error: any) {
       console.error("Error generating PDF or sending email:", error);
@@ -205,9 +182,7 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     }
   };
 
-  // Download PDF
   const handleDownloadPDF = () => {
-    // In a real scenario, you would generate a PDF on the client side or fetch it from a server
     toast.success("Descargando comprobante de reserva...");
   };
 

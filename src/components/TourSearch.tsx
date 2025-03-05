@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search } from "lucide-react";
 import { format } from "date-fns";
@@ -31,7 +30,6 @@ export function TourSearch() {
   const [isLoadingDates, setIsLoadingDates] = useState(false);
   const navigate = useNavigate();
 
-  // Fetch all locations on component mount
   useEffect(() => {
     async function fetchLocations() {
       try {
@@ -50,7 +48,6 @@ export function TourSearch() {
     fetchLocations();
   }, []);
 
-  // Fetch available dates when location changes
   useEffect(() => {
     async function fetchAvailableDates() {
       if (!selectedLocation) return;
@@ -65,10 +62,9 @@ export function TourSearch() {
         
         if (error) throw error;
         
-        // Convert string dates to Date objects
         const availableDates = (data || []).map((item: AvailableDate) => new Date(item.date));
         setAvailableDates(availableDates);
-        setSelectedDate(undefined); // Reset selected date when location changes
+        setSelectedDate(undefined);
       } catch (error) {
         console.error("Error fetching available dates:", error);
         toast.error("No se pudieron cargar las fechas disponibles");
@@ -86,11 +82,9 @@ export function TourSearch() {
       return;
     }
 
-    // Navigate to tours page with query parameters
     navigate(`/tours?location=${selectedLocation}&date=${format(selectedDate, "yyyy-MM-dd")}`);
   };
 
-  // Function to check if a date is available
   const isDateAvailable = (date: Date) => {
     return availableDates.some(availableDate => 
       availableDate.getFullYear() === date.getFullYear() &&
@@ -142,20 +136,18 @@ export function TourSearch() {
                 )}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-white" align="start">
+            <PopoverContent className="w-auto p-0" align="start">
               <CalendarComponent
                 mode="single"
                 selected={selectedDate}
                 onSelect={setSelectedDate}
                 disabled={(date) => {
-                  // Disable dates in the past
                   const today = new Date();
                   today.setHours(0, 0, 0, 0);
                   
                   return date < today || !isDateAvailable(date);
                 }}
                 initialFocus
-                className="bg-white"
               />
             </PopoverContent>
           </Popover>
