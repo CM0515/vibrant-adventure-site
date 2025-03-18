@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { MapPin, Calendar, Search } from "lucide-react";
 import { format } from "date-fns";
-import { DateRange, Range } from "react-date-range";
+import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { toast } from "sonner";
@@ -29,7 +28,7 @@ export function TourSearch() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [availableDates, setAvailableDates] = useState<Date[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
-  const [dateRange, setDateRange] = useState<Range[]>([
+  const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -119,8 +118,8 @@ export function TourSearch() {
     return false;
   };
   
-  const handleDateChange = (ranges: any) => {
-    setDateRange([ranges.selection]);
+  const handleDateChange = (item: any) => {
+    setDateRange([item.selection]);
   };
 
   return (

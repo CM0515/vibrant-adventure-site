@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { DateRange, Range } from "react-date-range";
+import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -33,7 +33,7 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
   const { t } = useLanguage();
   const [step, setStep] = useState<FormStep>('details');
   const [loading, setLoading] = useState(false);
-  const [dateRange, setDateRange] = useState<Range[]>([
+  const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -506,3 +506,4 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     </Dialog>
   );
 }
+
