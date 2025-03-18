@@ -89,7 +89,6 @@ export function ReservationModal({ isOpen, onOpenChange, tourData }: Reservation
     if (isOpen) {
       getUserData();
       
-      // Reset date range when modal opens
       setDateRange([
         {
           startDate: new Date(),
